@@ -1,0 +1,64 @@
+﻿@model TaobaoMVC.Models.OrderHeader
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>OrderHeader</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ContactName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ContactName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ContactPhoneNo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ContactPhoneNo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ContactAddress)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ContactAddress)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TotalPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TotalPrice)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Memo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Memo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BuyOn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BuyOn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DisplayName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DisplayName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

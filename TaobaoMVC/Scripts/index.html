@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>HTML4</title>
+</head>
+
+<body>
+	<!--<form id="filePost" method="post" action="http://localhost:57445/Product/UploadPicture/" enctype="multipart/form-data">
+	<!--<input type="text" name="Email">
+	<input type="text" name="Password">
+	<input type="text" name="Name">
+	<input type="text" name="NickName">
+	<input type="text" name="email">
+	<input type="text" name="password">
+	<input type="file" name="upfile">-->
+	
+	<!--<form id="filePost" method="post" action="http://localhost:57445/ProductCategory/Create/" enctype="multipart/form-data">
+		
+		<input type="text" name="Name">-->
+	<!--<form id="filePost" method="post" action="http://localhost:57445/Product/Create/" enctype="multipart/form-data">
+		
+			<input type="text" name="ProductCategory_Id" value="1">
+			<input type="text" name="Name" value="1">
+			<input type="text" name="Picture" value="\Upload\fd59a605-0fdf-460f-9a6e-daf3c39c0038.jpg">
+			<input type="text" name="Price" value="1">
+			<input name="token" type="text" value="1">-->
+	<!--<form id="filePost" method="post" action="http://localhost:57445/OrderHeader/Create/" enctype="multipart/form-data">
+		<input type="text" name="Member" value="1">
+		<input type="text" name="ContactName" value="1">
+		<input type="text" name="ContactPhoneNo" value="15689888988">
+		<input type="text" name="ContactAddress" value="1">
+		<input type="text" name="Memo" value="1">
+		<input type="text" name="json" value='[{"pid":3,"num":1},{"pid":4,"num":2}]'>
+		<input name="token" type="text" value="1">-->
+	<form id="filePost" method="post" action="http://localhost:57445/Home/Search" enctype="multipart/form-data">
+		<input type="text" name="str">	
+		<input type="submit" id="btn">
+	</form>
+
+<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="jquery.form.js"></script>
+<script type="text/javascript">
+
+         $(document).ready(function() {
+
+            var options = {
+
+                target: '#outputdiv',   
+
+                beforeSubmit: showRequest, 
+
+                success:showResponse,
+                error: showResponse,
+                complete:showResponse
+
+            };
+
+            $('#filePost').submit(function() {
+
+                $(this).ajaxSubmit(options);
+
+                return false;
+
+            });
+
+        });
+
+        function showRequest(formData, jqForm, options) {           
+
+            alert('发送前'); 
+
+            return true;
+
+        } 
+
+        function showResponse(responseText, statusText) {
+        	console.log(responseText.responseText);
+        	/*var str=responseText.responseText.replace("\"","").replace("\"","");
+        	document.write("<img src="+"http://localhost:57445"+str+" />");*/
+
+            alert('发送后');
+
+        } 
+
+
+
+/*$("#btn").click(function(){
+	//var formData = $("form").serializeArray();
+	var formData = new FormData(document.getElementsByTagName("form"));
+	$.post("http://localhost:57445/Product/UploadPicture/",formData,function(data,status){
+		console.log(data);
+	});
+});*/
+</script>
+</body>
+</html>

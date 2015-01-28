@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TaobaoMVC</name>
+    </assembly>
+    <members>
+        <member name="M:TaobaoMVC.Controllers.CommentController.Create(TaobaoMVC.Models.Comment,System.Int32,System.Int32)">
+            <summary>
+            添加评论
+            </summary>
+            <param name="comment">Content</param>
+            <param name="Member_ID">评论者ID</param>
+            <param name="Product_ID">铲平ID</param>
+            <example>POST: /Comment/Create</example>
+            <returns>错误信息或者true</returns>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.CommentController.DeleteConfirmed(System.Int32)">
+            <summary>
+            删除评论
+            </summary>
+            <param name="id">评论ID</param>
+            <example> POST: /Comment/Delete/5</example>
+            <returns>错误信息或true</returns>
+        </member>
+        <member name="T:TaobaoMVC.Controllers.HelpController">
+            <summary>
+            帮助控制器
+            </summary>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.HomeController.Index">
+            <summary>
+            获得商品列表
+            </summary>
+            <returns></returns>
+            <example>GET: /Home/</example>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.HomeController.ProductDetail(System.Int32)">
+            <summary>
+            获取商品详细信息
+            </summary>
+            <param name="id">商品id</param>
+            <returns>json</returns>
+            <example>GET: /Home/ProductDetail/11</example>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.HomeController.Search(System.String)">
+            <summary>
+            查询商品
+            </summary>
+            <param name="str">查询字符串，空格隔开</param>
+            <returns></returns>
+            <example>POST /Home/Search/</example>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.MemberController.Register(TaobaoMVC.Models.Member)">
+            <summary>
+            注册用户
+            </summary>
+            <param name="member">标签name：Email，Password，Name,NickName</param>
+            <returns>json信息</returns>
+            <example>POST: /Member/Register/</example>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.MemberController.Login(System.String,System.String)">
+            <summary>
+            用户登录
+            </summary>
+            <param name="email">用户email</param>
+            <param name="password">用户密码，未加密的</param>
+            <returns>返回一个token作为验证凭证，否则为错误信息</returns>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.MemberController.GetMember(System.String)">
+            <summary>
+            获得用户实例
+            </summary>
+            <example>Post /Member/GetMember/</example>
+            <param name="token">身份凭证</param>
+            <returns>包含用户昵称和是否为管理员身份</returns>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.OrderHeaderController.Create(TaobaoMVC.Models.OrderHeader,System.String,System.String)">
+            <summary>
+            添加订单
+            </summary>
+            <param name="orderheader">表单：ContactName,COntactPhoneNo,ContactAddress,Memo</param>
+            <param name="token"></param>
+            <param name="json">代表购物车的json：[{"pid":1,"num":1},{"pid":2,"num":2}]</param>
+            <returns></returns>
+            <example>POST: /OrderHeader/Create</example>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.ProductCategoryController.Index">
+            <summary>
+            获取商品类别
+            </summary>
+            <returns>json</returns>
+            <example>GET: /ProductCategory/</example>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.ProductCategoryController.Create(System.String,TaobaoMVC.Models.ProductCategory)">
+            <summary>
+            添加商品分类
+            </summary>
+            <param name="token">身份验证token</param>
+            <param name="productcategory">表单：Name</param>
+            <returns>json</returns>
+            <example>POST: /ProductCategory/Create</example>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.ProductCategoryController.Edit(System.String,TaobaoMVC.Models.ProductCategory)">
+            <summary>
+            修改商品分类
+            </summary>
+            <param name="token">用户验证token</param>
+            <param name="productcategory">表单：Name</param>
+            <returns>json</returns>
+            <example>POST: /ProductCategory/Edit/5(最后的数字为商品id)</example>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.ProductCategoryController.DeleteConfirmed(System.String,System.Int32)">
+            <summary>
+            删除一个商品分类
+            </summary>
+            <param name="token">身份验证token</param>
+            <param name="id">商品类别IDid</param>
+            <returns>json</returns>
+            <example>POST: /ProductCategory/Delete/5</example>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.ProductCategoryController.ValidMember(System.String)">
+            <summary>
+            验证用户token的权限
+            </summary>
+            <param name="token">传回来的token</param>
+            <returns>true ，false</returns>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.ProductController.Create(System.String,TaobaoMVC.Models.Product,System.Int32)">
+            <summary>
+            添加商品
+            </summary>
+            <param name="token">用户验证token</param>
+            <param name="product">表单：Name,Pircture,Price</param>
+            <returns></returns>
+            <example>POST: /Product/Create</example>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.ProductController.DeleteConfirmed(System.Int32)">
+            <summary>
+            删除商品
+            </summary>
+            <param name="id">商品ID</param>
+            <returns>true或触发的异常</returns>
+            <example>POST: /Product/Delete/5</example>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.ProductController.UploadPicture(System.Web.HttpPostedFileBase)">
+            <summary>
+            上传图片功能
+            </summary>
+            <param name="upfile">上传的图片</param>
+            <returns>上传后的路径</returns>
+            <example>POST: /Product/UploadPicture/</example>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.ProductController.ValidMember(System.String)">
+            <summary>
+            验证用户token的权限
+            </summary>
+            <param name="token">传回来的token</param>
+            <returns>true ，false</returns>
+        </member>
+    </members>
+</doc>
