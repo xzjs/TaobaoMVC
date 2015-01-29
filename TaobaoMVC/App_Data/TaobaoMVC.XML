@@ -84,6 +84,13 @@
             <returns></returns>
             <example>POST: /OrderHeader/Create</example>
         </member>
+        <member name="M:TaobaoMVC.Controllers.OrderHeaderController.DeleteConfirmed(System.Int32)">
+            <summary>
+            订单不需要删除功能
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:TaobaoMVC.Controllers.ProductCategoryController.Index">
             <summary>
             获取商品类别

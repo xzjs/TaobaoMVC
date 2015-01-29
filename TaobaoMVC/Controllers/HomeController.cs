@@ -10,7 +10,7 @@ namespace TaobaoMVC.Controllers
     public class HomeController : Controller
     {
         TaobaoMVCContext db = new TaobaoMVCContext();
-         
+
         /// <summary>
         /// 获得商品列表
         /// </summary>
@@ -44,15 +44,28 @@ namespace TaobaoMVC.Controllers
                 }
                 data_p = db.Products.ToList();
             }
-            var collect = data_p.Select(x => new
+            var collect_category = data.Select(x => new
+            {
+                id = x.Id,
+                name = x.Name,
+                products = x.Products.Select(y => new
                 {
-                    id = x.Id,
-                    name = x.Name,
-                    picture = x.Picture,
-                    price = x.Price,
-                    caregory = x.ProductCategory.Name
-                });
-            return Json(collect, JsonRequestBehavior.AllowGet);
+                    id = y.Id,
+                    name = y.Name,
+                    picture = y.Picture,
+                    price = y.Price,
+                    caregory = y.ProductCategory.Name
+                })
+            });
+            //var collect = data_p.Select(x => new
+            //    {
+            //        id = x.Id,
+            //        name = x.Name,
+            //        picture = x.Picture,
+            //        price = x.Price,
+            //        caregory = x.ProductCategory.Name
+            //    });
+            return Json(collect_category, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ProductList(int id)
