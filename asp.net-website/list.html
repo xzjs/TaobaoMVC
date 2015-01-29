@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-cn" ng-app="taobaoMVC">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title>联想网上商城</title>
+	<link href="css/style.css" rel="stylesheet" />
+    <!-- enable HTML5 elements in IE -->
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" type="text/css" href="css/ie.css" />
+    <script type="text/javascript" src="script/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<header>
+		<div class="container">
+			<div class="logo">
+				<a href="#"><img src="images/logo.jpg" alt="联想网上商城" title="联想网上商城" /></a>
+			</div>
+			<div class="welcome">
+				<p>欢迎您来到联想网上商城！请 <a href="#">[登录]</a> 或者 <a href="#">[免费注册]</a></p>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<nav class="nav" role="navigation">
+			<div class="container">
+				<ul class="first">
+					<li><a href="#">商城首页</a></li>
+					<li><a href="#">售后服务</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<div class="container">
+		<article class="main" role="main" ng-controller="listShow">
+			<!-- 一个分类的产品在一个section内 -->
+			<section class="detail">
+				<h1>{{titleString}}</h1>
+				<ul class="product-list">
+					<li ng-repeat="product in products">
+						<a href="product_detail_show.html?id={{product.id}}">
+							<img ng-src="{{product.picture}}" alt="{{product.name}}" title="{{product.name}}" />
+							<span class="price">￥{{product.price}}</span>
+							<span class="name">{{product.name}}</span>
+							<!--<span class="configuration"></span>-->
+						</a>
+					</li>
+				</ul>
+				<div class="clear"></div>
+			</section>
+		</article>
+		<aside>
+			<section id="classify">
+				<h1>所有分类</h1>
+				<ul ng-controller="productCategory">
+					<li ng-repeat="category in categorys">
+						<a href="list.html?categoryId={{category.id}}">{{category.name}}</a>
+					</li>
+				</ul>
+			</section>
+			<!--<section id="hotsale">
+				<h1>热销榜</h1>
+				<ul>
+					<li><a href="#">产品一</a></li>
+					<li><a href="#">产品二</a></li>
+					<li><a href="#">产品三</a></li>
+				</ul>
+			</section>-->
+		</aside>
+		<div class="clear"></div>
+	</div>
+	<footer>
+		<div class="container">
+			<img src="images/footer.png" />
+		</div>
+		<p>版权所有：1998－2014 联想官网商城 │ 京ICP备11035381</p>
+	</footer>
+<script type="text/javascript" src="script/jquery-1.11.1.min.js" ></script>
+<script type="text/javascript" src="script/angular.min.js" ></script>
+<script type="text/javascript" src="script/script.js"></script>
+<script type="text/javascript">
+	$.scrollFixed("#classify");
+</script>
+</body>
+</html>

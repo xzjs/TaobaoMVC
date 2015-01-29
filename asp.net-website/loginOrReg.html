@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title>联想网上商城</title>
+	<link href="css/style.css" rel="stylesheet" />
+    <!-- enable HTML5 elements in IE -->
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" type="text/css" href="css/ie.css" />
+    <script type="text/javascript" src="script/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<header>
+		<div class="container">
+			<div class="logo">
+				<a href="#"><img src="images/logo.jpg" alt="联想网上商城" title="联想网上商城" /></a>
+			</div>
+			<div class="welcome">
+				<p>欢迎您来到联想网上商城！请 <a href="#">[登录]</a> 或者 <a href="#">[免费注册]</a></p>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</header>
+	<div class="reg">
+		<nav>
+			<ul>
+				<li><a class="active" href="#">登录</a></li>
+				<li><a href="#">注册</a></li>
+			</ul>
+		</nav>
+		<div class="reg-con" style="display: block;">
+			<form>
+				<div class="input">
+					<span>请输入用户名</span>
+					<input type="text" />
+				</div>
+				<div class="input">
+					<span>请输入密码</span>
+					<input type="password" />
+				</div>
+				<input type="submit" class="submit" value="登录" />
+			</form>
+		</div>
+		<div class="reg-con">
+			<form>
+				<div class="input">
+					<span>请输入用户名</span>
+					<input type="text" />
+				</div>
+				<div class="input">
+					<span>请输入密码</span>
+					<input type="password" />
+				</div>
+				<div class="input">
+					<span>请再次输入密码</span>
+					<input type="password" />
+				</div>
+				<div class="input">
+					<span>请输入电话号码</span>
+					<input type="text" />
+				</div>
+				<div class="input address">
+					<span>请输入送货地址</span>
+					<textarea rows="3"></textarea>
+				</div>
+				<input type="submit" class="submit" value="注册" />
+			</form>
+		</div>
+	</div>
+	<footer>
+		<div class="container">
+			<img src="images/footer.png" />
+		</div>
+		<p>版权所有：1998－2014 联想官网商城 │ 京ICP备11035381</p>
+	</footer>
+<script type="text/javascript" src="script/jquery-1.11.1.min.js" ></script>
+<script type="text/javascript" src="script/script.js"></script>
+<script type="text/javascript">
+	$.regInput(".input");
+	
+</script>
+</body>
+</html>
