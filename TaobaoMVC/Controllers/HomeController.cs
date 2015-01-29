@@ -54,7 +54,7 @@ namespace TaobaoMVC.Controllers
                     name = y.Name,
                     picture = y.Picture,
                     price = y.Price,
-                    caregory = y.ProductCategory.Name
+                    category = y.ProductCategory.Name
                 })
             });
             //var collect = data_p.Select(x => new
