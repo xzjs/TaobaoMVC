@@ -33,10 +33,9 @@ taobaoMVC.controller("listShow", ["$scope", "$http", function ($scope, $http) {
 		}).error(function (data, status) {
 			//
 		});
-	} else if(query[0] == "search") {
+	} else if(query[0] === "search") {
 		// 展示搜索结果
-		var str = "111"
-		$http({method:"POST", url: basePath + "Home/Search/", data: str}).success(function (data) {
+		$http({method:"POST", url: basePath + "Home/Search/", data: "str=" + query[1], headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data) {
 			$scope.titleString = "搜索“" + query[1] + "”的结果：";
 			$scope.products = data;
 			console.log(data);
