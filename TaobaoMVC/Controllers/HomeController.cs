@@ -50,7 +50,7 @@ namespace TaobaoMVC.Controllers
                     name = x.Name,
                     picture = x.Picture,
                     price = x.Price,
-                    caregory = x.ProductCategory.Name
+                    category = x.ProductCategory.Name
                 });
             return Json(collect, JsonRequestBehavior.AllowGet);
         }
