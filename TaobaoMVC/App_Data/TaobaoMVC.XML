@@ -27,7 +27,7 @@
             帮助控制器
             </summary>
         </member>
-        <member name="M:TaobaoMVC.Controllers.HomeController.Index">
+        <member name="M:TaobaoMVC.Controllers.HomeController.Index(System.Int32)">
             <summary>
             获得商品列表
             </summary>

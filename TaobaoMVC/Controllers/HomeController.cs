@@ -16,14 +16,22 @@ namespace TaobaoMVC.Controllers
         /// </summary>
         /// <returns></returns>
         /// <example>GET: /Home/</example>
-        public ActionResult Index()
+        public ActionResult Index(int id=0)
         {
             try
             {
                 HttpContext.Application["1"] = db.Members.Find(1);
             }
             catch (Exception ex) { }
-            var data = db.ProductCategories.ToList();
+            List<ProductCategory> data = new List<ProductCategory>();
+            if (id == 0)
+            {
+                data = db.ProductCategories.ToList();
+            }
+            else
+            {
+                data = db.ProductCategories.Where(x => x.Id == id).ToList();
+            }
             if (data.Count == 0)
             {
                 db.ProductCategories.Add(new ProductCategory() { Id = 1, Name = "文具" });
@@ -123,6 +131,5 @@ namespace TaobaoMVC.Controllers
             });
             return Json(collect);
         }
-
     }
 }
