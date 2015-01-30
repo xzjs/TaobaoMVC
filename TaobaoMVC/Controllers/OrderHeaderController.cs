@@ -50,7 +50,7 @@ namespace TaobaoMVC.Controllers
         /// <summary>
         /// 添加订单
         /// </summary>
-        /// <param name="orderheader">表单：ContactName,COntactPhoneNo,ContactAddress,Memo</param>
+        /// <param name="orderheader">表单：ContactName,ContactPhoneNo,ContactAddress,Memo</param>
         /// <param name="token"></param>
         /// <param name="json">代表购物车的json：[{"pid":1,"num":1},{"pid":2,"num":2}]</param>
         /// <returns></returns>
