@@ -17,6 +17,26 @@ taobaoMVC.controller("productList", ["$scope", "$http", function ($scope, $http)
 		//
 	});
 }]);
+taobaoMVC.controller("productDetail", ["$scope", "$http", function ($scope, $http) {
+	// 获得产品详细信息
+	var queryString = location.search.length > 0 ? location.search.substring(1) : "";
+	if (queryString.length == 0) {
+		window.location.replace("index.html");
+	}
+	var query = decodeURIComponent(queryString).split("=");
+	if (query[0] === "id") {
+		$http({method:"GET", url: basePath + "Home/ProductDetail/" + query[1]}).success(function (data) {
+			$scope.product = data;
+			console.log(data);
+		}).error(function (data, status) {
+			//
+		});
+	} else{
+		// 跳转回首页
+		window.location.replace("index.html");
+	}
+	
+}]);
 taobaoMVC.controller("listShow", ["$scope", "$http", function ($scope, $http) {
 	// 查看单独一个分类的产品或展示搜索结果
 	var queryString = location.search.length > 0 ? location.search.substring(1) : "";
@@ -29,7 +49,6 @@ taobaoMVC.controller("listShow", ["$scope", "$http", function ($scope, $http) {
 		$http({method:"GET", url: basePath + "Home/index/" + query[1]}).success(function (data) {
 			$scope.titleString = data[0].name || "";
 			$scope.products = data[0].products || {};
-			console.log(data[0].products);
 		}).error(function (data, status) {
 			//
 		});

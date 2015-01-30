@@ -745,10 +745,13 @@ header .container {
 	float: right;
 	width: 801px;
 }
-.detail {
+.detail,
+.comment {
 	margin-bottom: 10px;
+	overflow: hidden;
 }
-.detail h1 {
+.detail h1,
+.comment h1 {
 	margin: 0;
 	height: 42px;
 	line-height: 42px;
@@ -786,7 +789,7 @@ header .container {
 	color: #dc291e;
 }
 .configuration {
-	font-size: .875em;
+	/*font-size: .875em;*/
 }
 
 .detail-img {
@@ -799,7 +802,7 @@ header .container {
 }
 .detail-con {
 	float: right;
-	width: 40%;
+	width: 38%;
 	margin-top: 1em;
 }
 .detail-con p {
@@ -809,6 +812,17 @@ header .container {
 	
 	border-bottom: 1px dashed #ccc;
 	letter-spacing: 2px;
+}
+.comment-list li {
+	position: relative;
+	padding: .5em 0 .5em 2em;
+	border-bottom: 1px dashed #ccc;
+	overflow: hidden;
+}
+.comment-list li .list-index {
+	position: absolute;
+	top: .5em;
+	left: 0;
 }
 .buy {
 	padding: 1em;

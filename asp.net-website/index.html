@@ -47,14 +47,14 @@
 		</nav>
 	</header>
 	<div class="container">
-		<div id="focus" class="focus">
+		<!--<div id="focus" class="focus">
 			<ul>
 				<li><img src="images/banner1.jpg" alt="图片1" title="图片1" /></li>
 				<li><img src="images/banner1.jpg" alt="图片1" title="图片1" /></li>
 				<li><img src="images/banner1.jpg" alt="图片1" title="图片1" /></li>
 			</ul>
 		</div>
-		<!--<section id="notice" class="notice">
+		<section id="notice" class="notice">
 			<h1>最新公告：</h1>
 			<ul>
 				<li>6英寸炫酷大屏9mm纤薄机身A889新鲜上架！</li>
@@ -68,7 +68,7 @@
 				<h1>{{product.name}}</h1>
 				<ul class="product-list">
 					<li ng-repeat="productDetail in product.products">
-						<a href="product_detail_show.html?id={{productDetail.id}}">
+						<a href="productDetail.html?id={{productDetail.id}}">
 							<img ng-src="{{productDetail.picture}}" alt="{{productDetail.name}}" title="{{productDetail.name}}" />
 							<span class="price">￥{{productDetail.price}}</span>
 							<span class="name">{{productDetail.name}}</span>
@@ -109,7 +109,7 @@
 <script type="text/javascript" src="script/angular.min.js" ></script>
 <script type="text/javascript" src="script/script.js"></script>
 <script type="text/javascript">
-	$.focus("#focus");
+//	$.focus("#focus");
 //	$.notice("#notice");
 	$.scrollFixed("#classify");
 </script>
