@@ -34,7 +34,6 @@ namespace TaobaoMVC.Models
         public string Name { get; set; }
 
         [DisplayName("網路暱稱")]
-        [Required(ErrorMessage = "請輸入網路暱稱")]
         [MaxLength(10, ErrorMessage = "網路暱稱請勿輸入超過10個字")]
         public string Nickname { get; set; }
 
