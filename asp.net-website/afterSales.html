@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="zh-cn">
+<html lang="zh-cn" ng-app="taobaoMVC">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-	<title>联想网上商城</title>
+	<title>网上商城售后服务</title>
 	<link href="css/style.css" rel="stylesheet" />
     <!-- enable HTML5 elements in IE -->
     <!--[if lt IE 9]>
@@ -16,33 +16,25 @@
 	<header>
 		<div class="container">
 			<div class="logo">
-				<a href="#"><img src="images/logo.jpg" alt="联想网上商城" title="联想网上商城" /></a>
+				<a href="index.html"><img src="images/logo.jpg" alt="网上商城" title="网上商城" /></a>
 			</div>
-			<div class="welcome">
-				<p>欢迎您来到联想网上商城！请 <a href="#">[登录]</a> 或者 <a href="#">[免费注册]</a></p>
+			<div class="welcome" ng-controller="UserStatus">
+				<p>欢迎来到网上商城！ <a ng-href="{{target}}" ng-bind="tips">请[登录]或者[免费注册]</a><a href="#" ng-click="logout()" ng-bind="logoutText"></a></p>
 			</div>
-			<div class="clear"></div>
 		</div>
-		<nav role="navigation">
+		<nav class="nav" role="navigation">
 			<div class="container">
 				<ul class="first">
-					<li><a href="#">商城首页</a></li>
-					<li>
-						<a href="#">所有产品</a>
-						<ul class="second">
-							<li>
-								<a href="#">分类一</a>
-							</li>
-							<li>
-								<a href="#">分类二</a>
-							</li>
-							<li>
-								<a href="#">分类二</a>
-							</li>
-						</ul>
-					</li>
-					<li><a href="#">售后服务</a></li>
+					<li><a href="index.html">商城首页</a></li>
+					<li><a href="cart.html">购物车</a></li>
+					<li><a class="active" href="afterSales.html">售后服务</a></li>
 				</ul>
+				<div class="search">
+					<form method="post">
+						<input type="text" name="searchText" placeholder="请输入查询关键字" ng-model="searchText" />
+						<a href="list.html?search={{searchText}}">搜索</a>
+					</form>
+				</div>
 			</div>
 		</nav>
 	</header>
@@ -51,25 +43,17 @@
 			<section class="detail">
 				<h1>售后服务</h1>
 				<p>商品自购买日起7天之内包换，一年之内保修。</p>
-				<p>维修人员电话：18354225833</p>
-				<p>联系人：章鹏</p>
+				<p>维修人员电话：123456789</p>
+				<p>联系人：何潭碧</p>
 			</section>
 		</article>
 		<aside>
-			<!--section id="classify">
+			<section id="classify">
 				<h1>所有分类</h1>
-				<ul>
-					<li><a href="javascript:;">分类一</a></li>
-					<li><a href="javascript:;">分类二</a></li>
-					<li><a href="javascript:;">分类三</a></li>
-				</ul>
-			</section-->
-			<section id="hotsale">
-				<h1>热销榜</h1>
-				<ul>
-					<li><a href="#">产品一</a></li>
-					<li><a href="#">产品二</a></li>
-					<li><a href="#">产品三</a></li>
+				<ul ng-controller="ProductCategory">
+					<li ng-repeat="category in categorys">
+						<a href="list.html?categoryId={{category.id}}">{{category.name}}</a>
+					</li>
 				</ul>
 			</section>
 		</aside>
@@ -82,8 +66,11 @@
 		<p>版权所有：1998－2014 联想官网商城 │ 京ICP备11035381</p>
 	</footer>
 <script type="text/javascript" src="script/jquery-1.11.1.min.js" ></script>
+<script type="text/javascript" src="script/angular.min.js" ></script>
+<script type="text/javascript" src="script/angular-cookies.min.js" ></script>
 <script type="text/javascript" src="script/script.js"></script>
 <script type="text/javascript">
+//	$.scrollFixed("#classify");
 </script>
 </body>
 </html>

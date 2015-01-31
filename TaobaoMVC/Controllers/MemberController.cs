@@ -138,7 +138,7 @@ namespace TaobaoMVC.Controllers
         /// </summary>
         /// <param name="email">用户email</param>
         /// <param name="password">用户密码，未加密的</param>
-        /// <returns>返回一个token作为验证凭证，否则为错误信息</returns>
+        /// <returns>返回一个token作为验证凭证和IsAdmin标志，否则为错误信息</returns>
         [HttpPost]
         public ActionResult Login(string email, string password)
         {
@@ -153,7 +153,7 @@ namespace TaobaoMVC.Controllers
                     //FormsAuthentication.SetAuthCookie(email,false);
                     string token = Guid.NewGuid().ToString();
                     HttpContext.Application[token] = member;
-                    return Json(new { token = token });
+                    return Json(new { token = token, member.IsAdmin});
                 }
                 else
                 {
@@ -171,9 +171,10 @@ namespace TaobaoMVC.Controllers
         /// </summary>
         /// <param name="token">用户token</param>
         [HttpPost]
-        public void Logout(string token)
+        public ActionResult Logout(string token)
         {
             HttpContext.Application[token] = null;
+            return Json(true);
         }
 
         private void SendAuthCodeToMember(Member member)

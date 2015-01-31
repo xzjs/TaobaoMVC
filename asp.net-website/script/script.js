@@ -95,10 +95,17 @@ taobaoMVC.controller("LoginUser", ["$scope", "$http", "$cookieStore", function (
 	$scope.login = function () {
 		$scope.tips = "正在登录中，请稍后...";
 		$http({method:"POST", url: basePath + "Member/Login/", data: $.param($scope.user), headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
-			if ("token" in data) {
-				$cookieStore.put("token", data);
+			if (data.token) {
+				console.log(data.token);
+				$cookieStore.put("token", data.token);
 				$scope.tips = "登录成功";
-				location.
+				setTimeout(function () {
+					if (data.IsAdmin) {
+						location.href = "admin.html";
+					} else{
+//						location.href = "index.html";
+					}
+				},1000);
 			} else{
 				$scope.tips = data;
 			}
@@ -113,11 +120,10 @@ taobaoMVC.controller("UserStatus", ["$scope", "$http", "$cookieStore", function 
 	if (token) {
 		$scope.tips = "正在自动登录...";
 		$http({method:"POST", url: basePath + "Member/GetMember/", data: $.param(token), headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
-			console.log(data);
-			if ("name" in data) {
-//				$cookieStore.put("token", data);
-				$scope.tips = data.name;
+			if (data.name) {
+				$scope.tips = "[" + data.name + "]";
 				$scope.target = "order.html";
+				$scope.logoutText = "[注销]";
 			} else{
 				$scope.tips = "验证身份失败";
 				alert(data);
@@ -125,11 +131,30 @@ taobaoMVC.controller("UserStatus", ["$scope", "$http", "$cookieStore", function 
 		}).error(function (data, status) {
 			$scope.tips = "登录失败";
 		});
+		$scope.logout = function () {
+			$http({method:"POST", url: basePath + "Member/Logout/", data: $.param(token), headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+				console.log(data);
+				if (data) {
+					$cookieStore.remove("token");
+					location.reload();
+				}
+			}).error(function (data, status) {
+				$scope.logoutText = "注销失败";
+			});
+		}
 	} else{
 		$scope.tips = "请[登录]或者[免费注册]";
 		$scope.target = "loginOrReg.html";
 	}
 	
+}]);
+taobaoMVC.controller("CartList", ["$scope", "$http", function ($scope, $http) {
+	// 购物车列表
+	$http({method:"GET", url: basePath + "ProductCategory/"}).success(function (data) {
+		$scope.categorys = data;
+	}).error(function (data, status) {
+		//
+	});
 }]);
 (function() {
 	$.extend({

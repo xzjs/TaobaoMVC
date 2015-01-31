@@ -581,6 +581,7 @@ header {
 }
 header .container {
 	padding: 24px 0;
+	overflow: hidden;
 }
 .logo {
 	float: left;
@@ -599,6 +600,9 @@ header .container {
 }
 .welcome a {
 	color: #2980b9;
+}
+.welcome a:first-child {
+	margin: 0 .5em;
 }
 .nav {
 	background: #dc291e;
@@ -645,6 +649,11 @@ header .container {
 .nav .search input {
 	border: none;
 	padding: .4em;
+}
+.nav .search a {
+	display: inline;
+	padding-left: .5em;
+	padding-right: .5em;
 }
 .notice {
 	position: relative;

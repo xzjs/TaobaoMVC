@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-	<title>联想网上商城</title>
+	<title>网上商城商品</title>
 	<link href="css/style.css" rel="stylesheet" />
     <!-- enable HTML5 elements in IE -->
     <!--[if lt IE 9]>
@@ -16,33 +16,25 @@
 	<header>
 		<div class="container">
 			<div class="logo">
-				<a href="#"><img src="images/logo.jpg" alt="联想网上商城" title="联想网上商城" /></a>
+				<a href="index.html"><img src="images/logo.jpg" alt="网上商城" title="网上商城" /></a>
 			</div>
-			<div class="welcome">
-				<p>欢迎您来到联想网上商城！请 <a href="#">[登录]</a> 或者 <a href="#">[免费注册]</a></p>
+			<div class="welcome" ng-controller="UserStatus">
+				<p>欢迎来到网上商城！ <a ng-href="{{target}}" ng-bind="tips">请[登录]或者[免费注册]</a><a href="#" ng-click="logout()" ng-bind="logoutText"></a></p>
 			</div>
-			<div class="clear"></div>
 		</div>
-		<nav role="navigation">
+		<nav class="nav" role="navigation">
 			<div class="container">
 				<ul class="first">
-					<li><a href="#">商城首页</a></li>
-					<li>
-						<a href="#">所有产品</a>
-						<ul class="second">
-							<li>
-								<a href="#">分类一</a>
-							</li>
-							<li>
-								<a href="#">分类二</a>
-							</li>
-							<li>
-								<a href="#">分类二</a>
-							</li>
-						</ul>
-					</li>
-					<li><a href="#">售后服务</a></li>
+					<li><a href="index.html">商城首页</a></li>
+					<li><a href="cart.html">购物车</a></li>
+					<li><a href="afterSales.html">售后服务</a></li>
 				</ul>
+				<div class="search">
+					<form method="post">
+						<input type="text" name="searchText" placeholder="请输入查询关键字" ng-model="searchText" />
+						<a href="list.html?search={{searchText}}">搜索</a>
+					</form>
+				</div>
 			</div>
 		</nav>
 	</header>
@@ -96,6 +88,7 @@
 	</footer>
 <script type="text/javascript" src="script/jquery-1.11.1.min.js" ></script>
 <script type="text/javascript" src="script/angular.min.js" ></script>
+<script type="text/javascript" src="script/angular-cookies.min.js" ></script>
 <script type="text/javascript" src="script/script.js"></script>
 <script type="text/javascript">
 </script>
