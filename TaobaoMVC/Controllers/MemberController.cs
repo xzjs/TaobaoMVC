@@ -262,7 +262,7 @@ namespace TaobaoMVC.Controllers
             var member = (Member)HttpContext.Application[token];
             if (member != null)
             {
-                return Json(new { name = member.Nickname, member.IsAdmin });
+                return Json(new { name = member.Name, member.IsAdmin });
             }
             else
             {
