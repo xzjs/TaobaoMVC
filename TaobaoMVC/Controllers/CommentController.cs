@@ -47,30 +47,35 @@ namespace TaobaoMVC.Controllers
         /// </summary>
         /// <param name="comment">Content</param>
         /// <param name="Member_ID">评论者ID</param>
-        /// <param name="Product_ID">铲平ID</param>
+        /// <param name="Product_ID">产品ID</param>
+        /// <param name="token">用户验证token</param>
         /// <example>POST: /Comment/Create</example>
         /// <returns>错误信息或者true</returns>
         [HttpPost]
-        public ActionResult Create(Comment comment, int Member_ID, int Product_ID)
+        public ActionResult Create(Comment comment, int Member_ID, int Product_ID, string token)
         {
             try
             {
-                Member m = db.Members.Find(Member_ID);
-                if (m == null)
+                if (ValidMember(token))
                 {
-                    return Json("用户不存在");
+                    Member m = db.Members.Find(Member_ID);
+                    if (m == null)
+                    {
+                        return Json("用户不存在");
+                    }
+                    Product p = db.Products.Find(Product_ID);
+                    if (p == null)
+                    {
+                        return Json("商品不存在");
+                    }
+                    comment.Date = DateTime.Now;
+                    comment.Member = m;
+                    comment.Product = p;
+                    db.Comments.Add(comment);
+                    db.SaveChanges();
+                    return Json(true);
                 }
-                Product p = db.Products.Find(Product_ID);
-                if (p == null)
-                {
-                    return Json("商品不存在");
-                }
-                comment.Date = DateTime.Now;
-                comment.Member = m;
-                comment.Product = p;
-                db.Comments.Add(comment);
-                db.SaveChanges();
-                return Json(true);
+                return Json("没有权限");
             }
             catch (Exception ex)
             {
@@ -107,35 +112,25 @@ namespace TaobaoMVC.Controllers
             return View(comment);
         }
 
-        //
-        // GET: /Comment/Delete/5
-
-        public ActionResult Delete(int id = 0)
-        {
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
-            {
-                return HttpNotFound();
-            }
-            return View(comment);
-        }
-
-        
         /// <summary>
         /// 删除评论
         /// </summary>
         /// <param name="id">评论ID</param>
         /// <example> POST: /Comment/Delete/5</example>
         /// <returns>错误信息或true</returns>
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public ActionResult Delete(int id,string token)
         {
             try
             {
-                Comment comment = db.Comments.Find(id);
-                db.Comments.Remove(comment);
-                db.SaveChanges();
-                return Json(true);
+                if (ValidMember(token))
+                {
+                    Comment comment = db.Comments.Find(id);
+                    db.Comments.Remove(comment);
+                    db.SaveChanges();
+                    return Json(true);
+                }
+                return Json("没有权限");
             }
             catch (Exception ex)
             {
@@ -147,6 +142,21 @@ namespace TaobaoMVC.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        /// <summary>
+        /// 验证用户token的权限
+        /// </summary>
+        /// <param name="token">传回来的token</param>
+        /// <returns>true ，false</returns>
+        private bool ValidMember(string token)
+        {
+            var member = (Member)HttpContext.Application[token];
+            if (member == null || member.IsAdmin == false)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

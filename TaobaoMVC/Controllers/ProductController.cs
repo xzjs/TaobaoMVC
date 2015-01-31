@@ -98,39 +98,30 @@ namespace TaobaoMVC.Controllers
             return View(product);
         }
 
-        //
-        // GET: /Product/Delete/5
-
-        public ActionResult Delete(int id = 0)
-        {
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
-        }
-
         /// <summary>
         /// 删除商品
         /// </summary>
         /// <param name="id">商品ID</param>
-        /// <returns>true或触发的异常</returns>
-        /// <example>POST: /Product/Delete/5</example>
+        /// <param name="token">身份验证token</param>
+        /// <returns>true或者异常信息</returns>
         [HttpPost]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id,string token)
         {
-            try
+            if (ValidMember(token))
             {
-                Product product = db.Products.Find(id);
-                db.Products.Remove(product);
-                db.SaveChanges();
-                return Json(true);
+                try
+                {
+                    Product product = db.Products.Find(id);
+                    db.Products.Remove(product);
+                    db.SaveChanges();
+                    return Json(true);
+                }
+                catch (Exception ex)
+                {
+                    return Json(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                return Json(ex.Message);
-            }
+            return Json("没有权限");
         }
 
         protected override void Dispose(bool disposing)

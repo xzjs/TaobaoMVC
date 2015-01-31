@@ -139,6 +139,7 @@ namespace TaobaoMVC.Controllers
         /// <param name="email">用户email</param>
         /// <param name="password">用户密码，未加密的</param>
         /// <returns>返回一个token作为验证凭证，否则为错误信息</returns>
+        [HttpPost]
         public ActionResult Login(string email, string password)
         {
             var hash_pw = FormsAuthentication.HashPasswordForStoringInConfigFile(pwSalt + password, "SHA1");
@@ -196,7 +197,7 @@ namespace TaobaoMVC.Controllers
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress("asp_net2014@163.com");
                 mail.To.Add(member.Email);
-                mail.Subject = "【淘宝】會員註冊確認信";
+                mail.Subject = "【淘宝】会员注册确认信";
                 mail.Body = mailBody;
                 mail.IsBodyHtml = true;
 
@@ -230,6 +231,11 @@ namespace TaobaoMVC.Controllers
             }
         }
 
+        /// <summary>
+        /// 供前台ajax验证email是否已注册
+        /// </summary>
+        /// <param name="Email">要验证的email</param>
+        /// <returns>true或false</returns>
         [HttpPost]
         public ActionResult CheckDup(string Email)
         {
