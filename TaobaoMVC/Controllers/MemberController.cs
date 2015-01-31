@@ -166,10 +166,14 @@ namespace TaobaoMVC.Controllers
             }
         }
 
-        public void Logout()
+        /// <summary>
+        /// 注销
+        /// </summary>
+        /// <param name="token">用户token</param>
+        [HttpPost]
+        public void Logout(string token)
         {
-            FormsAuthentication.SignOut();
-            Session.Clear();
+            HttpContext.Application[token] = null;
         }
 
         private void SendAuthCodeToMember(Member member)
