@@ -27,14 +27,6 @@
 			<div class="container">
 				<ul class="first">
 					<li><a class="active" href="index.html">商城首页</a></li>
-					<!--<li>
-						<a href="#">所有产品</a>
-						<ul class="second" ng-controller="productCategory">
-							<li ng-repeat="category in categorys">
-								<a href="#">{{category.name}}</a>
-							</li>
-						</ul>
-					</li>-->
 					<li><a href="#">售后服务</a></li>
 				</ul>
 				<div class="search">
@@ -47,14 +39,14 @@
 		</nav>
 	</header>
 	<div class="container">
-		<div id="focus" class="focus">
+		<!--<div id="focus" class="focus">
 			<ul>
 				<li><img src="images/banner1.jpg" alt="图片1" title="图片1" /></li>
 				<li><img src="images/banner1.jpg" alt="图片1" title="图片1" /></li>
 				<li><img src="images/banner1.jpg" alt="图片1" title="图片1" /></li>
 			</ul>
 		</div>
-		<!--<section id="notice" class="notice">
+		<section id="notice" class="notice">
 			<h1>最新公告：</h1>
 			<ul>
 				<li>6英寸炫酷大屏9mm纤薄机身A889新鲜上架！</li>
@@ -62,13 +54,13 @@
 				<li>33333333333333333333</li>
 			</ul>
 		</section>-->
-		<article class="main" role="main" ng-controller="productList">
+		<article class="main" role="main" ng-controller="ProductList">
 			<!-- 一个分类的产品在一个section内 -->
 			<section class="detail" ng-repeat="product in products">
 				<h1>{{product.name}}</h1>
 				<ul class="product-list">
 					<li ng-repeat="productDetail in product.products">
-						<a href="product_detail_show.html?id={{productDetail.id}}">
+						<a href="productDetail.html?id={{productDetail.id}}">
 							<img ng-src="{{productDetail.picture}}" alt="{{productDetail.name}}" title="{{productDetail.name}}" />
 							<span class="price">￥{{productDetail.price}}</span>
 							<span class="name">{{productDetail.name}}</span>
@@ -82,7 +74,7 @@
 		<aside>
 			<section id="classify">
 				<h1>所有分类</h1>
-				<ul ng-controller="productCategory">
+				<ul ng-controller="ProductCategory">
 					<li ng-repeat="category in categorys">
 						<a href="list.html?categoryId={{category.id}}">{{category.name}}</a>
 					</li>
@@ -109,7 +101,7 @@
 <script type="text/javascript" src="script/angular.min.js" ></script>
 <script type="text/javascript" src="script/script.js"></script>
 <script type="text/javascript">
-	$.focus("#focus");
+//	$.focus("#focus");
 //	$.notice("#notice");
 	$.scrollFixed("#classify");
 </script>

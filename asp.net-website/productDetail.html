@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-cn">
+<html lang="zh-cn" ng-app="taobaoMVC">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -47,39 +47,44 @@
 		</nav>
 	</header>
 	<div class="container">
-		<article class="main" role="main">
+		<article class="main" role="main" ng-controller="ProductDetail">
 			<section class="detail">
-				<h1>商品名称</h1>
+				<h1>{{product.name}}</h1>
 				<div class="detail-img">
-					<img src="#" alt="#" title="#" />
+					<img ng-src="{{product.picture}}" alt="{{product.name}}" title="{{product.name}}" />
 				</div>
 				<div class="detail-con">
-					<p class="configuration">商品描述描述描述商品描述描述描述商品描述描述描述商品描述描述描述。。。</p>
-					<p class="price">￥5900</p>
+					<p class="configuration">类型：{{product.category}}</p>
+					<p class="price">￥{{product.price}}</p>
 					<div class="buy">
 						<a href="javascript:;">加入购物车</a>
 					</div>
 				</div>
-				<div class="clear"></div>
+			</section>
+			<section class="comment">
+				<h1>商品评价：</h1>
+				<ul class="comment-list">
+					<li><span class="list-index">1.</span><span>这是评论。。。。。。。。这是评论。。。。。。。。这是评论。。。。。。。。这是评论。。。。。。。。这是评论。。。。。。。。</span></li>
+				</ul>
 			</section>
 		</article>
 		<aside>
-			<!--section id="classify">
+			<section id="classify">
 				<h1>所有分类</h1>
-				<ul>
-					<li><a href="javascript:;">分类一</a></li>
-					<li><a href="javascript:;">分类二</a></li>
-					<li><a href="javascript:;">分类三</a></li>
+				<ul ng-controller="ProductCategory">
+					<li ng-repeat="category in categorys">
+						<a href="list.html?categoryId={{category.id}}">{{category.name}}</a>
+					</li>
 				</ul>
-			</section-->
-			<section id="hotsale">
+			</section>
+			<!--<section id="hotsale">
 				<h1>热销榜</h1>
 				<ul>
 					<li><a href="#">产品一</a></li>
 					<li><a href="#">产品二</a></li>
 					<li><a href="#">产品三</a></li>
 				</ul>
-			</section>
+			</section>-->
 		</aside>
 		<div class="clear"></div>
 	</div>
@@ -90,6 +95,7 @@
 		<p>版权所有：1998－2014 联想官网商城 │ 京ICP备11035381</p>
 	</footer>
 <script type="text/javascript" src="script/jquery-1.11.1.min.js" ></script>
+<script type="text/javascript" src="script/angular.min.js" ></script>
 <script type="text/javascript" src="script/script.js"></script>
 <script type="text/javascript">
 </script>

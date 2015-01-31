@@ -33,13 +33,13 @@
 		</nav>
 	</header>
 	<div class="container">
-		<article class="main" role="main" ng-controller="listShow">
+		<article class="main" role="main" ng-controller="ListShow">
 			<!-- 一个分类的产品在一个section内 -->
 			<section class="detail">
 				<h1>{{titleString}}</h1>
 				<ul class="product-list">
 					<li ng-repeat="product in products">
-						<a href="product_detail_show.html?id={{product.id}}">
+						<a href="productDetail.html?id={{product.id}}">
 							<img ng-src="{{product.picture}}" alt="{{product.name}}" title="{{product.name}}" />
 							<span class="price">￥{{product.price}}</span>
 							<span class="name">{{product.name}}</span>
@@ -47,13 +47,14 @@
 						</a>
 					</li>
 				</ul>
+				<p ng-bind="tips"></p>
 				<div class="clear"></div>
 			</section>
 		</article>
 		<aside>
 			<section id="classify">
 				<h1>所有分类</h1>
-				<ul ng-controller="productCategory">
+				<ul ng-controller="ProductCategory">
 					<li ng-repeat="category in categorys">
 						<a href="list.html?categoryId={{category.id}}">{{category.name}}</a>
 					</li>
