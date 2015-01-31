@@ -46,19 +46,19 @@ namespace TaobaoMVC.Controllers
         /// 添加评论
         /// </summary>
         /// <param name="comment">Content</param>
-        /// <param name="Member_ID">评论者ID</param>
         /// <param name="Product_ID">产品ID</param>
         /// <param name="token">用户验证token</param>
         /// <example>POST: /Comment/Create</example>
         /// <returns>错误信息或者true</returns>
         [HttpPost]
-        public ActionResult Create(Comment comment, int Member_ID, int Product_ID, string token)
+        public ActionResult Create(Comment comment, int Product_ID, string token)
         {
             try
             {
                 if (ValidMember(token))
                 {
-                    Member m = db.Members.Find(Member_ID);
+                    var m = (Member)HttpContext.Application[token];
+                    //Member m = db.Members.Find(Member_ID);
                     if (m == null)
                     {
                         return Json("用户不存在");
@@ -152,7 +152,7 @@ namespace TaobaoMVC.Controllers
         private bool ValidMember(string token)
         {
             var member = (Member)HttpContext.Application[token];
-            if (member == null || member.IsAdmin == false)
+            if (member == null)
             {
                 return false;
             }

@@ -4,23 +4,30 @@
         <name>TaobaoMVC</name>
     </assembly>
     <members>
-        <member name="M:TaobaoMVC.Controllers.CommentController.Create(TaobaoMVC.Models.Comment,System.Int32,System.Int32)">
+        <member name="M:TaobaoMVC.Controllers.CommentController.Create(TaobaoMVC.Models.Comment,System.Int32,System.String)">
             <summary>
             添加评论
             </summary>
             <param name="comment">Content</param>
-            <param name="Member_ID">评论者ID</param>
-            <param name="Product_ID">铲平ID</param>
+            <param name="Product_ID">产品ID</param>
+            <param name="token">用户验证token</param>
             <example>POST: /Comment/Create</example>
             <returns>错误信息或者true</returns>
         </member>
-        <member name="M:TaobaoMVC.Controllers.CommentController.DeleteConfirmed(System.Int32)">
+        <member name="M:TaobaoMVC.Controllers.CommentController.Delete(System.Int32,System.String)">
             <summary>
             删除评论
             </summary>
             <param name="id">评论ID</param>
             <example> POST: /Comment/Delete/5</example>
             <returns>错误信息或true</returns>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.CommentController.ValidMember(System.String)">
+            <summary>
+            验证用户token的权限
+            </summary>
+            <param name="token">传回来的token</param>
+            <returns>true ，false</returns>
         </member>
         <member name="T:TaobaoMVC.Controllers.HelpController">
             <summary>
@@ -65,6 +72,13 @@
             <param name="email">用户email</param>
             <param name="password">用户密码，未加密的</param>
             <returns>返回一个token作为验证凭证，否则为错误信息</returns>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.MemberController.CheckDup(System.String)">
+            <summary>
+            供前台ajax验证email是否已注册
+            </summary>
+            <param name="Email">要验证的email</param>
+            <returns>true或false</returns>
         </member>
         <member name="M:TaobaoMVC.Controllers.MemberController.GetMember(System.String)">
             <summary>
@@ -141,13 +155,13 @@
             <returns></returns>
             <example>POST: /Product/Create</example>
         </member>
-        <member name="M:TaobaoMVC.Controllers.ProductController.DeleteConfirmed(System.Int32)">
+        <member name="M:TaobaoMVC.Controllers.ProductController.Delete(System.Int32,System.String)">
             <summary>
             删除商品
             </summary>
             <param name="id">商品ID</param>
-            <returns>true或触发的异常</returns>
-            <example>POST: /Product/Delete/5</example>
+            <param name="token">身份验证token</param>
+            <returns>true或者异常信息</returns>
         </member>
         <member name="M:TaobaoMVC.Controllers.ProductController.UploadPicture(System.Web.HttpPostedFileBase)">
             <summary>
