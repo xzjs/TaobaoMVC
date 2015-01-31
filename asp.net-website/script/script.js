@@ -1,7 +1,7 @@
 // JavaScript Document
 var basePath = "http://localhost:57445/";
-var taobaoMVC = angular.module('taobaoMVC',[]);
-taobaoMVC.controller("productCategory", ["$scope", "$http", function ($scope, $http) {
+var taobaoMVC = angular.module('taobaoMVC',['ngCookies']);
+taobaoMVC.controller("ProductCategory", ["$scope", "$http", function ($scope, $http) {
 	// 获得产品分类列表
 	$http({method:"GET", url: basePath + "ProductCategory/"}).success(function (data) {
 		$scope.categorys = data;
@@ -9,7 +9,7 @@ taobaoMVC.controller("productCategory", ["$scope", "$http", function ($scope, $h
 		//
 	});
 }]);
-taobaoMVC.controller("productList", ["$scope", "$http", function ($scope, $http) {
+taobaoMVC.controller("ProductList", ["$scope", "$http", function ($scope, $http) {
 	// 获得产品列表，按分类区分
 	$http({method:"GET", url: basePath + "Home/"}).success(function (data) {
 		$scope.products = data;
@@ -17,7 +17,7 @@ taobaoMVC.controller("productList", ["$scope", "$http", function ($scope, $http)
 		//
 	});
 }]);
-taobaoMVC.controller("productDetail", ["$scope", "$http", function ($scope, $http) {
+taobaoMVC.controller("ProductDetail", ["$scope", "$http", function ($scope, $http) {
 	// 获得产品详细信息
 	var queryString = location.search.length > 0 ? location.search.substring(1) : "";
 	if (queryString.length == 0) {
@@ -37,7 +37,7 @@ taobaoMVC.controller("productDetail", ["$scope", "$http", function ($scope, $htt
 	}
 	
 }]);
-taobaoMVC.controller("listShow", ["$scope", "$http", function ($scope, $http) {
+taobaoMVC.controller("ListShow", ["$scope", "$http", function ($scope, $http) {
 	// 查看单独一个分类的产品或展示搜索结果
 	var queryString = location.search.length > 0 ? location.search.substring(1) : "";
 	if (queryString.length == 0) {
@@ -67,6 +67,43 @@ taobaoMVC.controller("listShow", ["$scope", "$http", function ($scope, $http) {
 	} else {
 		// 跳转回首页
 		window.location.replace("index.html");
+	}
+}]);
+taobaoMVC.controller("RegUser", ["$scope", "$http", function ($scope, $http) {
+	// 用户注册
+	$scope.tips = "注册",
+	$scope.user = {};
+	$scope.regUser = function () {
+		if ($scope.user.Password === $scope.user.PasswordAgain) {
+			$scope.tips = "正在注册中，请稍后...";
+			delete $scope.user.PasswordAgain;
+			$http({method:"POST", url: basePath + "Member/Register/", data: $.param($scope.user), headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+				$scope.tips = data;
+			}).error(function (data, status) {
+				$scope.tips = "注册失败";
+			});
+		} else{
+			alert("两次密码输入应一致！");
+			delete $scope.user.PasswordAgain;
+		}
+	}
+}]);
+taobaoMVC.controller("LoginUser", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
+	// 用户登录
+	$scope.tips = "登录",
+	$scope.user = {};
+	$scope.login = function () {
+		$scope.tips = "正在登录中，请稍后...";
+		$http({method:"POST", url: basePath + "Member/Login/", data: $.param($scope.user), headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+			if ("token" in data) {
+				$cookieStore.put("token", data);
+				$scope.tips = "登录成功";
+			} else{
+				$scope.tips = data;
+			}
+		}).error(function (data, status) {
+			$scope.tips = "注册失败";
+		});
 	}
 }]);
 (function() {

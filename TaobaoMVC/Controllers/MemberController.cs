@@ -60,7 +60,7 @@ namespace TaobaoMVC.Controllers
             var chk_member = db.Members.Where(p => p.Email == member.Email).FirstOrDefault();
             if (chk_member != null)
             {
-                return Json("您输入的Email已经有人注册过了");
+                return Json("您输入的Email已经注册过了");
             }
 
             member.Password = FormsAuthentication.HashPasswordForStoringInConfigFile(pwSalt + member.Password, "SHA1");
@@ -69,7 +69,7 @@ namespace TaobaoMVC.Controllers
             db.Members.Add(member);
             db.SaveChanges();
             SendAuthCodeToMember(member);
-            return Json("请登录邮箱完成邮箱认证");
+            return Json("注册成功，请登录邮箱完成邮箱认证");
         }
 
         //

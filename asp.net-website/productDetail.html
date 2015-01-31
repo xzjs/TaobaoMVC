@@ -47,7 +47,7 @@
 		</nav>
 	</header>
 	<div class="container">
-		<article class="main" role="main" ng-controller="productDetail">
+		<article class="main" role="main" ng-controller="ProductDetail">
 			<section class="detail">
 				<h1>{{product.name}}</h1>
 				<div class="detail-img">
@@ -71,7 +71,7 @@
 		<aside>
 			<section id="classify">
 				<h1>所有分类</h1>
-				<ul ng-controller="productCategory">
+				<ul ng-controller="ProductCategory">
 					<li ng-repeat="category in categorys">
 						<a href="list.html?categoryId={{category.id}}">{{category.name}}</a>
 					</li>

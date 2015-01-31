@@ -33,7 +33,7 @@
 		</nav>
 	</header>
 	<div class="container">
-		<article class="main" role="main" ng-controller="listShow">
+		<article class="main" role="main" ng-controller="ListShow">
 			<!-- 一个分类的产品在一个section内 -->
 			<section class="detail">
 				<h1>{{titleString}}</h1>
@@ -54,7 +54,7 @@
 		<aside>
 			<section id="classify">
 				<h1>所有分类</h1>
-				<ul ng-controller="productCategory">
+				<ul ng-controller="ProductCategory">
 					<li ng-repeat="category in categorys">
 						<a href="list.html?categoryId={{category.id}}">{{category.name}}</a>
 					</li>
