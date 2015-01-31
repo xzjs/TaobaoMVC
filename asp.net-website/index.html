@@ -19,7 +19,7 @@
 				<a href="#"><img src="images/logo.jpg" alt="联想网上商城" title="联想网上商城" /></a>
 			</div>
 			<div class="welcome">
-				<p>欢迎您来到联想网上商城！请 <a href="#">[登录]</a> 或者 <a href="#">[免费注册]</a></p>
+				<p>欢迎您来到联想网上商城！请 <a href="loginOrReg.html">[登录]</a> 或者 <a href="loginOrReg.html">[免费注册]</a></p>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -39,21 +39,6 @@
 		</nav>
 	</header>
 	<div class="container">
-		<!--<div id="focus" class="focus">
-			<ul>
-				<li><img src="images/banner1.jpg" alt="图片1" title="图片1" /></li>
-				<li><img src="images/banner1.jpg" alt="图片1" title="图片1" /></li>
-				<li><img src="images/banner1.jpg" alt="图片1" title="图片1" /></li>
-			</ul>
-		</div>
-		<section id="notice" class="notice">
-			<h1>最新公告：</h1>
-			<ul>
-				<li>6英寸炫酷大屏9mm纤薄机身A889新鲜上架！</li>
-				<li>22222222222222222</li>
-				<li>33333333333333333333</li>
-			</ul>
-		</section>-->
 		<article class="main" role="main" ng-controller="ProductList">
 			<!-- 一个分类的产品在一个section内 -->
 			<section class="detail" ng-repeat="product in products">
@@ -80,14 +65,6 @@
 					</li>
 				</ul>
 			</section>
-			<!--<section id="hotsale">
-				<h1>热销榜</h1>
-				<ul>
-					<li><a href="#">产品一</a></li>
-					<li><a href="#">产品二</a></li>
-					<li><a href="#">产品三</a></li>
-				</ul>
-			</section>-->
 		</aside>
 		<div class="clear"></div>
 	</div>
@@ -101,8 +78,6 @@
 <script type="text/javascript" src="script/angular.min.js" ></script>
 <script type="text/javascript" src="script/script.js"></script>
 <script type="text/javascript">
-//	$.focus("#focus");
-//	$.notice("#notice");
 	$.scrollFixed("#classify");
 </script>
 </body>

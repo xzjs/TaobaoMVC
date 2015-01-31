@@ -98,13 +98,38 @@ taobaoMVC.controller("LoginUser", ["$scope", "$http", "$cookieStore", function (
 			if ("token" in data) {
 				$cookieStore.put("token", data);
 				$scope.tips = "登录成功";
+				location.
 			} else{
 				$scope.tips = data;
 			}
 		}).error(function (data, status) {
-			$scope.tips = "注册失败";
+			$scope.tips = "登录失败";
 		});
 	}
+}]);
+taobaoMVC.controller("UserStatus", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
+	// 验证用户身份
+	var token = $cookieStore.get("token");
+	if (token) {
+		$scope.tips = "正在自动登录...";
+		$http({method:"POST", url: basePath + "Member/GetMember/", data: $.param(token), headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+			console.log(data);
+			if ("name" in data) {
+//				$cookieStore.put("token", data);
+				$scope.tips = data.name;
+				$scope.target = "order.html";
+			} else{
+				$scope.tips = "验证身份失败";
+				alert(data);
+			}
+		}).error(function (data, status) {
+			$scope.tips = "登录失败";
+		});
+	} else{
+		$scope.tips = "请[登录]或者[免费注册]";
+		$scope.target = "loginOrReg.html";
+	}
+	
 }]);
 (function() {
 	$.extend({
