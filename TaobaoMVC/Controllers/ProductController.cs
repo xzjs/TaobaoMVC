@@ -94,18 +94,18 @@ namespace TaobaoMVC.Controllers
         /// <example>POST: /Product/Edit/5</example>
         /// <returns>true或异常</returns>
         [HttpPost]
-        public ActionResult Edit(Product product, int ProductCategory_Id, string token)
+        public ActionResult Edit(Product product, int ProductCategory_Id, string token, HttpPostedFileBase upfile)
         {
             if (ValidMember(token))
             {
                 var pc = db.ProductCategories.Find(ProductCategory_Id);
                 product.ProductCategory = pc;
-                if (ModelState.IsValid)
-                {
-                    db.Entry(product).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return Json(true);
-                }
+                product.Picture = UploadPicture(upfile);
+
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json(true);
+
             }
 
             return Json("没有权限");
