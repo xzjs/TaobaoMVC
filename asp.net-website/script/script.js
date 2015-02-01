@@ -157,7 +157,7 @@ taobaoMVC.controller("CartList", ["$scope", "$http", function ($scope, $http) {
 //	});
 }]);
 taobaoMVC.controller("ManageController", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
-	// 后台管理控制器
+	// 后台管理身份验证
 	var token = $cookieStore.get("token"),
 		editData = {
 			"token": token,
@@ -188,7 +188,7 @@ taobaoMVC.controller("ManageController", ["$scope", "$http", "$cookieStore", fun
 	}
 }]);
 taobaoMVC.controller("EditCategory", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
-	// 后台管理控制器
+	// 后台分类编辑，删除
 	var token = $cookieStore.get("token");
 	$scope.editFormShow = false;
 	$scope.deleteFormShow = false;
@@ -217,6 +217,46 @@ taobaoMVC.controller("EditCategory", ["$scope", "$http", "$cookieStore", functio
 			console.log(data);
 			if (data === true) {
 				alert("删除成功！");
+				location.reload();
+			} else {
+				alert(data);
+			}
+		}).error(function (data, status) {
+			alert("网络出错！");
+		});
+	}
+}]);
+taobaoMVC.controller("CreateCategory", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
+	// 后台分类添加
+	var token = $cookieStore.get("token");
+	$scope.createFormShow = false;
+	$scope.createToggle = function () {
+		$scope.createFormShow = !$scope.createFormShow;
+	}
+	$scope.createCategory = function (e) {
+		$http({method:"POST", url: basePath + "ProductCategory/Create/", data: "token=" + token + "&Name=" + $scope.categoryName, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+			if (data === true) {
+				alert("添加成功！");
+				location.reload();
+			} else {
+				alert(data);
+			}
+		}).error(function (data, status) {
+			alert("网络出错！");
+		});
+	}
+}]);
+taobaoMVC.controller("CreateProduct", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
+	// 后台分类添加
+	var token = $cookieStore.get("token");
+	$scope.createFormShow = false;
+	$scope.createToggle = function () {
+		$scope.createFormShow = !$scope.createFormShow;
+	}
+	$scope.createProduct = function (e) {
+		$http({method:"POST", url: basePath + "ProductCategory/Create/", data: "token=" + token + "&Name=" + $scope.categoryName, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+			if (data === true) {
+				alert("添加成功！");
 				location.reload();
 			} else {
 				alert(data);

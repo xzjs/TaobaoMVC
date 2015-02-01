@@ -14,6 +14,7 @@ namespace TaobaoMVC.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
         [DisplayName("商品類別")]
         public virtual ProductCategory ProductCategory { get; set; }
 

@@ -743,7 +743,7 @@ header .container {
 	display: block;
 	text-align: center;
 }
-.detail.manage a {
+.detail.manage h1 a {
 	display: inline;
 	height: auto;
 }
@@ -761,12 +761,64 @@ header .container {
 }
 .manage h1 form {
 	position: absolute;
+	top: 44px;
 	width: 100%;
 	padding-left: .5em;
 	background: #eee;
 }
-.manage h1 form {
-	
+ul.manage-list {
+	float: none;
+}
+ul.manage-list li {
+	float: none;
+	width: auto;
+}
+ul.manage-list li div {
+	display: inline-block;
+	font-size: 16px;
+	vertical-align: top;
+}
+ul.manage-list li div span {
+	display: block;
+	padding: .5em 0;
+	text-align: center;
+}
+.create-category {
+	margin: 2em 0 1em 0;
+	border: 2px dashed #e74c3c;
+	background: #eee;
+}
+.create-category:hover {
+	border: 2px solid #e74c3c;
+}
+.create-category form {
+	padding: 1em;
+}
+.create-category a:hover {
+	color: #dc291e;
+}
+.create-category a,
+.create-product a {
+	display: block;
+	padding: 1em;
+	color: #333;
+	text-align: center;
+}
+.create-product {
+	background: #eee;
+}
+.create-product form {
+	padding: .5em;
+}
+.create-product a {
+	height: auto;
+	padding: .5em;
+}
+
+.create-product a:hover {
+	height: auto;
+	border: none;
+	color: #dc291e;
 }
 .price {
 	color: #dc291e;
