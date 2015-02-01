@@ -48,6 +48,7 @@ namespace TaobaoMVC.Controllers
         /// </summary>
         /// <param name="token">用户验证token</param>
         /// <param name="product">表单：Name,Pircture,Price</param>
+        /// <param name="ProductCategory_Id">类别id</param>
         /// <returns></returns>
         /// <example>POST: /Product/Create</example>
         [HttpPost]
@@ -82,20 +83,30 @@ namespace TaobaoMVC.Controllers
             return View(product);
         }
 
-        //
-        // POST: /Product/Edit/5
-
+        /// <summary>
+        /// 修改商品
+        /// </summary>
+        /// <param name="product">标签name：Name,Picture,Price</param>
+        /// <param name="ProductCategory_Id">类别ID</param>
+        /// <param name="token">身份验证token</param>
+        /// <example>POST: /Product/Edit/5</example>
+        /// <returns>true或异常</returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Product product,int ProductCategory_Id,string token)
         {
-            if (ModelState.IsValid)
+            if (ValidMember(token))
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var pc = db.ProductCategories.Find(ProductCategory_Id);
+                product.ProductCategory = pc;
+                if (ModelState.IsValid)
+                {
+                    db.Entry(product).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(true);
+                }
             }
-            return View(product);
+
+            return Json("没有权限");
         }
 
         /// <summary>

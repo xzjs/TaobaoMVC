@@ -158,8 +158,19 @@
             </summary>
             <param name="token">用户验证token</param>
             <param name="product">表单：Name,Pircture,Price</param>
+            <param name="ProductCategory_Id">类别id</param>
             <returns></returns>
             <example>POST: /Product/Create</example>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.ProductController.Edit(TaobaoMVC.Models.Product,System.Int32,System.String)">
+            <summary>
+            修改商品
+            </summary>
+            <param name="product">标签name：Name,Picture,Price</param>
+            <param name="ProductCategory_Id">类别ID</param>
+            <param name="token">身份验证token</param>
+            <example>POST: /Product/Edit/5</example>
+            <returns>true或异常</returns>
         </member>
         <member name="M:TaobaoMVC.Controllers.ProductController.Delete(System.Int32,System.String)">
             <summary>
