@@ -73,6 +73,12 @@
             <param name="password">用户密码，未加密的</param>
             <returns>返回一个token作为验证凭证，否则为错误信息</returns>
         </member>
+        <member name="M:TaobaoMVC.Controllers.MemberController.Logout(System.String)">
+            <summary>
+            注销
+            </summary>
+            <param name="token">用户token</param>
+        </member>
         <member name="M:TaobaoMVC.Controllers.MemberController.CheckDup(System.String)">
             <summary>
             供前台ajax验证email是否已注册
