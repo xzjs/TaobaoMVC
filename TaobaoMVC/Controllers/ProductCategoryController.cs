@@ -139,8 +139,8 @@ namespace TaobaoMVC.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(string token, int id)
         {
-            try
-            {
+            //try
+            //{
                 if (ValidMember(token))
                 {
                     ProductCategory productcategory = db.ProductCategories.Find(id);
@@ -149,10 +149,10 @@ namespace TaobaoMVC.Controllers
                     return Json(true);
                 }
                 return Json("没有权限");
-            }
-            catch (Exception ex) {
-                return Json(ex.Message);
-            }
+            //}
+            //catch (Exception ex) {
+            //    return Json(ex.Message);
+            //}
         }
 
         protected override void Dispose(bool disposing)
