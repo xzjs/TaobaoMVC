@@ -137,16 +137,22 @@ namespace TaobaoMVC.Controllers
         /// <returns>json</returns>
         /// <example>POST: /ProductCategory/Delete/5</example>
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(string token,int id)
+        public ActionResult DeleteConfirmed(string token, int id)
         {
-            if (ValidMember(token))
+            try
             {
-                ProductCategory productcategory = db.ProductCategories.Find(id);
-                db.ProductCategories.Remove(productcategory);
-                db.SaveChanges();
-                return Json(true);
+                if (ValidMember(token))
+                {
+                    ProductCategory productcategory = db.ProductCategories.Find(id);
+                    db.ProductCategories.Remove(productcategory);
+                    db.SaveChanges();
+                    return Json(true);
+                }
+                return Json("没有权限");
             }
-            return Json("没有权限");
+            catch (Exception ex) {
+                return Json(ex.Message);
+            }
         }
 
         protected override void Dispose(bool disposing)

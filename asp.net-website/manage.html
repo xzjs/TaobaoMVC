@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-cn" ng-app="taobaoMVC">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title>联想网上商城</title>
+	<link href="css/style.css" rel="stylesheet" />
+    <!-- enable HTML5 elements in IE -->
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" type="text/css" href="css/ie.css" />
+    <script type="text/javascript" src="script/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-controller="ManageController">
+	<header>
+		<nav class="nav" role="navigation">
+			<div class="container">
+				<h1>网上商城管理系统</h1>
+				<div class="welcome manage"><span ng-bind="tips">正在验证身份...</span><a href="#" ng-click="logout()" ng-bind="logoutText"></a></div>
+			</div>
+		</nav>
+	</header>
+	<div class="container">
+		<article class="main manage" role="main" ng-controller="ProductList">
+			<!-- 一个分类的产品在一个section内 -->
+			<section class="detail manage" ng-repeat="product in products">
+				<h1 ng-controller="EditCategory">{{$index + 1 + ".&nbsp;"}}<span class="title">{{product.name}}</span>
+					<a href="javascript:;" ng-click="editToggle()">修改分类名称</a>
+					<a href="javascript:;" ng-click="deleteToggle()">删除分类</a>
+					<form ng-show="editFormShow" ng-submit="editCategory(this.product)">
+						<input type="text" ng-model="categoryName" placeholder="请输入新分类名" required />
+						<input type="submit" value="修改" />
+						<a href="javascript:;" ng-click="editToggle()">取消</a>
+					</form>
+					<form ng-show="deleteFormShow" ng-submit="deleteCategory(this.product)">
+						真的要删除？
+						<input type="submit" value="删除" />
+						<a href="javascript:;" ng-click="deleteToggle()">取消</a>
+					</form>
+				</h1>
+				<ul class="product-list">
+					<li ng-repeat="productDetail in product.products">
+						<a href="productDetail.html?id={{productDetail.id}}">
+							<img ng-src="{{productDetail.picture}}" alt="{{productDetail.name}}" title="{{productDetail.name}}" />
+							<span class="price">￥{{productDetail.price}}</span>
+							<span class="name">{{productDetail.name}}</span>
+							<!--<span class="configuration"></span>-->
+						</a>
+					</li>
+				</ul>
+				<div class="clear"></div>
+			</section>
+		</article>
+		<!--<aside>
+			<section id="hotsale">
+				<h1>管理菜单</h1>
+				<ul>
+					<li><a href="#">分类管理</a></li>
+					<li><a href="#">商品管理</a></li>
+				</ul>
+			</section>
+		</aside>-->
+		<div class="clear"></div>
+	</div>
+	<footer>
+		<div class="container">
+			<img src="images/footer.png" />
+		</div>
+		<p>版权所有：1998－2014 联想官网商城 │ 京ICP备11035381</p>
+	</footer>
+<script type="text/javascript" src="script/jquery-1.11.1.min.js" ></script>
+<script type="text/javascript" src="script/angular.min.js" ></script>
+<script type="text/javascript" src="script/angular-cookies.min.js" ></script>
+<script type="text/javascript" src="script/script.js"></script>
+<script type="text/javascript">
+</script>
+</body>
+</html>
