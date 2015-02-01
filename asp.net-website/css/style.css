@@ -772,30 +772,49 @@ ul.manage-list {
 ul.manage-list li {
 	float: none;
 	width: auto;
+	font-size: 0;
 }
-ul.manage-list li div {
+ul.manage-list li span {
 	display: inline-block;
 	font-size: 16px;
-	vertical-align: top;
+	line-height: 2em;
+	vertical-align: middle;
+	text-align: center;
+}
+ul.manage-list li span img {
+	display: block;
+	width: 100%;
+}
+ul.manage-list .list-img {
+	width: 20%;
+}
+ul.manage-list .list-price {
+	width: 15%;
+}
+ul.manage-list .list-name {
+	width: 45%;
+}
+ul.manage-list .list-control {
+	width: 20%;
 }
 ul.manage-list li div span {
 	display: block;
 	padding: .5em 0;
 	text-align: center;
 }
-.create-category {
-	margin: 2em 0 1em 0;
+.create-category,
+.create-product {
+	margin: 2em 0;
 	border: 2px dashed #e74c3c;
 	background: #eee;
 }
-.create-category:hover {
+.create-category:hover,
+.create-product:hover {
 	border: 2px solid #e74c3c;
 }
-.create-category form {
+.create-category form,
+.create-product form {
 	padding: 1em;
-}
-.create-category a:hover {
-	color: #dc291e;
 }
 .create-category a,
 .create-product a {
@@ -804,20 +823,8 @@ ul.manage-list li div span {
 	color: #333;
 	text-align: center;
 }
-.create-product {
-	background: #eee;
-}
-.create-product form {
-	padding: .5em;
-}
-.create-product a {
-	height: auto;
-	padding: .5em;
-}
-
+.create-category a:hover,
 .create-product a:hover {
-	height: auto;
-	border: none;
 	color: #dc291e;
 }
 .price {

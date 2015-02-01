@@ -11,6 +11,7 @@ taobaoMVC.controller("ProductCategory", ["$scope", "$http", function ($scope, $h
 }]);
 taobaoMVC.controller("ProductList", ["$scope", "$http", function ($scope, $http) {
 	// 获得产品列表，按分类区分
+	$scope.base = basePath;
 	$http({method:"GET", url: basePath + "Home/"}).success(function (data) {
 		$scope.products = data;
 	}).error(function (data, status) {
@@ -24,6 +25,7 @@ taobaoMVC.controller("ProductDetail", ["$scope", "$http", function ($scope, $htt
 		window.location.replace("index.html");
 	}
 	var query = decodeURIComponent(queryString).split("=");
+	$scope.base = basePath;
 	if (query[0] === "id") {
 		$http({method:"GET", url: basePath + "Home/ProductDetail/" + query[1]}).success(function (data) {
 			$scope.product = data;
@@ -44,6 +46,7 @@ taobaoMVC.controller("ListShow", ["$scope", "$http", function ($scope, $http) {
 		window.location.replace("index.html");
 	}
 	var query = decodeURIComponent(queryString).split("=");
+	$scope.base = basePath;
 	if (query[0] === "categoryId") {
 		// 查看单独一个分类的产品
 		$http({method:"GET", url: basePath + "Home/index/" + query[1]}).success(function (data) {
@@ -247,16 +250,63 @@ taobaoMVC.controller("CreateCategory", ["$scope", "$http", "$cookieStore", funct
 	}
 }]);
 taobaoMVC.controller("CreateProduct", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
-	// 后台分类添加
-	var token = $cookieStore.get("token");
+	// 后台商品添加
+	$scope.token = $cookieStore.get("token");
 	$scope.createFormShow = false;
 	$scope.createToggle = function () {
 		$scope.createFormShow = !$scope.createFormShow;
 	}
-	$scope.createProduct = function (e) {
-		$http({method:"POST", url: basePath + "ProductCategory/Create/", data: "token=" + token + "&Name=" + $scope.categoryName, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+	$scope.createProduct = function () {
+		$("#createProductForm").ajaxSubmit({
+			url: basePath + "Product/Create/",
+			success: function (data) {
+				console.log(data);
+			},
+			error: function () {
+				
+			}
+		})
+	}
+}]);
+taobaoMVC.controller("EditProduct", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
+	// 后台商品编辑，删除
+	$scope.token = $cookieStore.get("token");
+//	$scope.base = basePath;
+	$scope.editFormShow = false;
+	$scope.deleteFormShow = false;
+	$scope.editToggle = function () {
+		$scope.editFormShow = !$scope.editFormShow;
+	}
+	$scope.deleteToggle = function () {
+		$scope.deleteFormShow = !$scope.deleteFormShow;
+	}
+	$scope.editProduct = function (id) {
+		$("#createProductForm" + id).ajaxSubmit({
+			url: basePath + "Product/Edit/",
+			success: function (data) {
+				console.log(data);
+			},
+			error: function () {
+				
+			}
+		})
+//		$http({method:"POST", url: basePath + "ProductCategory/Edit/" + id, data: "token=" + $scope.token + "&Name=" + $scope.categoryName, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+//			if (data === true) {
+//				alert("修改成功！");
+//				location.reload();
+//			} else {
+//				alert(data);
+//			}
+//		}).error(function (data, status) {
+//			alert("网络出错！");
+//		});
+	}
+	$scope.deleteProduct = function (id) {
+		alert("删除商品！");
+		$http({method:"POST", url: basePath + "Product/Delete/" + id, data: "token=" + $scope.token + "&id=" + id, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+			console.log(data);
 			if (data === true) {
-				alert("添加成功！");
+				alert("删除成功！");
 				location.reload();
 			} else {
 				alert(data);

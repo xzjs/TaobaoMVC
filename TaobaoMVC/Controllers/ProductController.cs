@@ -42,7 +42,7 @@ namespace TaobaoMVC.Controllers
             return View();
         }
 
-        
+
         /// <summary>
         /// 添加商品
         /// </summary>
@@ -53,19 +53,19 @@ namespace TaobaoMVC.Controllers
         /// <returns></returns>
         /// <example>POST: /Product/Create</example>
         [HttpPost]
-        public ActionResult Create(string token, Product product,int ProductCategory_Id,HttpPostedFileBase upfile)
+        public ActionResult Create(string token, Product product, int ProductCategory_Id, HttpPostedFileBase upfile)
         {
             if (ValidMember(token))
             {
                 var pc = db.ProductCategories.Find(ProductCategory_Id);
                 product.ProductCategory = pc;
                 product.Picture = UploadPicture(upfile);
-                if (ModelState.IsValid)
-                {                           
-                    db.Products.Add(product);
-                    db.SaveChanges();
-                    return Json(true);
-                }
+
+                db.Products.Add(product);
+                db.SaveChanges();
+                return Json(true);
+
+
             }
 
             return Json("没有权限");
@@ -94,7 +94,7 @@ namespace TaobaoMVC.Controllers
         /// <example>POST: /Product/Edit/5</example>
         /// <returns>true或异常</returns>
         [HttpPost]
-        public ActionResult Edit(Product product,int ProductCategory_Id,string token)
+        public ActionResult Edit(Product product, int ProductCategory_Id, string token)
         {
             if (ValidMember(token))
             {
@@ -118,7 +118,7 @@ namespace TaobaoMVC.Controllers
         /// <param name="token">身份验证token</param>
         /// <returns>true或者异常信息</returns>
         [HttpPost]
-        public ActionResult Delete(int id,string token)
+        public ActionResult Delete(int id, string token)
         {
             if (ValidMember(token))
             {
