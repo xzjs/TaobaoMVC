@@ -95,14 +95,134 @@ taobaoMVC.controller("LoginUser", ["$scope", "$http", "$cookieStore", function (
 	$scope.login = function () {
 		$scope.tips = "正在登录中，请稍后...";
 		$http({method:"POST", url: basePath + "Member/Login/", data: $.param($scope.user), headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
-			if ("token" in data) {
-				$cookieStore.put("token", data);
+			if (data.token) {
+				console.log(data.token);
+				$cookieStore.put("token", data.token);
 				$scope.tips = "登录成功";
+				setTimeout(function () {
+					if (data.IsAdmin) {
+						location.href = "manage.html";
+					} else{
+//						location.href = "index.html";
+					}
+				},1000);
 			} else{
 				$scope.tips = data;
 			}
 		}).error(function (data, status) {
-			$scope.tips = "注册失败";
+			$scope.tips = "登录失败";
+		});
+	}
+}]);
+taobaoMVC.controller("UserStatus", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
+	// 验证用户身份
+	var token = $cookieStore.get("token");
+	if (token) {
+		$scope.tips = "正在自动登录...";
+		$http({method:"POST", url: basePath + "Member/GetMember/", data: "token=" + token, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+			if (data.name) {
+				$scope.tips = "[" + data.name + "]";
+				$scope.target = "order.html";
+				$scope.logoutText = "[注销]";
+			} else{
+				$scope.tips = "验证身份失败";
+				alert(data);
+			}
+		}).error(function (data, status) {
+			$scope.tips = "登录失败";
+		});
+		$scope.logout = function () {
+			$http({method:"POST", url: basePath + "Member/Logout/", data: "token=" + token, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+				console.log(data);
+				if (data) {
+					$cookieStore.remove("token");
+					location.reload();
+				}
+			}).error(function (data, status) {
+				$scope.logoutText = "注销失败";
+			});
+		}
+	} else{
+		$scope.tips = "请[登录]或者[免费注册]";
+		$scope.target = "loginOrReg.html";
+	}
+	
+}]);
+taobaoMVC.controller("CartList", ["$scope", "$http", function ($scope, $http) {
+	// 购物车列表
+//	$http({method:"GET", url: basePath + "ProductCategory/"}).success(function (data) {
+//		$scope.categorys = data;
+//	}).error(function (data, status) {
+//		//
+//	});
+}]);
+taobaoMVC.controller("ManageController", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
+	// 后台管理控制器
+	var token = $cookieStore.get("token"),
+		editData = {
+			"token": token,
+			"Name": $scope.categoryName
+		};
+	if (!token) {
+		window.location.replace("loginOrReg.html");
+	}
+	$http({method:"POST", url: basePath + "Member/GetMember/", data: "token=" + token, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+		if (!data.IsAdmin) {
+			// 不是管理员
+			window.location.replace("loginOrReg.html");
+		}
+		$scope.tips = "欢迎回来，管理员。";
+		$scope.logoutText = "[注销]";
+	}).error(function (data, status) {
+		window.location.replace("loginOrReg.html");
+	});
+	$scope.logout = function () {
+		$http({method:"POST", url: basePath + "Member/Logout/", data: "token=" + token, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+			if (data) {
+				$cookieStore.remove("token");
+				location.reload();
+			}
+		}).error(function (data, status) {
+			$scope.logoutText = "注销失败";
+		});
+	}
+}]);
+taobaoMVC.controller("EditCategory", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
+	// 后台管理控制器
+	var token = $cookieStore.get("token");
+	$scope.editFormShow = false;
+	$scope.deleteFormShow = false;
+	$scope.editToggle = function () {
+		$scope.editFormShow = !$scope.editFormShow;
+	}
+	$scope.deleteToggle = function () {
+		$scope.deleteFormShow = !$scope.deleteFormShow;
+	}
+	$scope.editCategory = function (e) {
+		$http({method:"POST", url: basePath + "ProductCategory/Edit/" + e.id, data: "token=" + token + "&Name=" + $scope.categoryName, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+			if (data === true) {
+				alert("修改成功！");
+				location.reload();
+			} else {
+				alert(data);
+			}
+		}).error(function (data, status) {
+			alert("网络出错！");
+		});
+	}
+	$scope.deleteCategory = function (e) {
+		alert("删除分类！");
+		console.log(e.id)
+		$http({method:"POST", url: basePath + "ProductCategory/Delete/" + e.id, data: "token=" + token + "&id=" + e.id, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+			console.log(data);
+			if (data === true) {
+				alert("删除成功！");
+				location.reload();
+			} else {
+				alert(data);
+			}
+		}).error(function (data, status) {
+			alert("网络出错！");
 		});
 	}
 }]);

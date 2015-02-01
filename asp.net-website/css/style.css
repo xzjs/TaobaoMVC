@@ -581,6 +581,7 @@ header {
 }
 header .container {
 	padding: 24px 0;
+	overflow: hidden;
 }
 .logo {
 	float: left;
@@ -591,6 +592,10 @@ header .container {
 .welcome {
 	float: right;
 }
+.welcome.manage {
+	line-height: 4em;
+	color: #fff;
+}
 .welcome p {
 	margin: 0;
 	height: 33px;
@@ -600,12 +605,25 @@ header .container {
 .welcome a {
 	color: #2980b9;
 }
+.welcome.manage a {
+	display: inline;
+	width: auto;
+	padding: 0;
+}
+.welcome a:first-child {
+	margin: 0 .5em;
+}
 .nav {
 	background: #dc291e;
 }
 .nav .container {
 	padding: 0;
 	overflow: hidden;
+}
+.nav h1 {
+	float: left;
+	font-size: 1.5em;
+	color: #fff;
 }
 .nav li {
 	position: relative;
@@ -646,6 +664,11 @@ header .container {
 	border: none;
 	padding: .4em;
 }
+.nav .search a {
+	display: inline;
+	padding-left: .5em;
+	padding-right: .5em;
+}
 .notice {
 	position: relative;
 	margin-bottom: 10px;
@@ -675,6 +698,10 @@ header .container {
 .main {
 	float: right;
 	width: 801px;
+}
+.main.manage {
+	float: none;
+	width: auto;
 }
 .detail,
 .comment {
@@ -715,6 +742,31 @@ header .container {
 .detail a span {
 	display: block;
 	text-align: center;
+}
+.detail.manage a {
+	display: inline;
+	height: auto;
+}
+.manage h1 {
+	position: relative;
+}
+.manage h1 a {
+	font-size: 14px;
+	color: #999;
+	font-weight: normal;
+}
+.manage h1 a:hover {
+	color: #333;
+	border: none;
+}
+.manage h1 form {
+	position: absolute;
+	width: 100%;
+	padding-left: .5em;
+	background: #eee;
+}
+.manage h1 form {
+	
 }
 .price {
 	color: #dc291e;
