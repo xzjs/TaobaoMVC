@@ -49,15 +49,17 @@ namespace TaobaoMVC.Controllers
         /// <param name="token">用户验证token</param>
         /// <param name="product">表单：Name,Pircture,Price</param>
         /// <param name="ProductCategory_Id">类别id</param>
+        /// <param name="upfile">上传的图片</param>
         /// <returns></returns>
         /// <example>POST: /Product/Create</example>
         [HttpPost]
-        public ActionResult Create(string token, Product product,int ProductCategory_Id)
+        public ActionResult Create(string token, Product product,int ProductCategory_Id,HttpPostedFileBase upfile)
         {
             if (ValidMember(token))
             {
                 var pc = db.ProductCategories.Find(ProductCategory_Id);
                 product.ProductCategory = pc;
+                product.Picture = UploadPicture(upfile);
                 if (ModelState.IsValid)
                 {                           
                     db.Products.Add(product);
@@ -148,7 +150,7 @@ namespace TaobaoMVC.Controllers
         /// <returns>上传后的路径</returns>
         /// <example>POST: /Product/UploadPicture/</example>
         [HttpPost]
-        public ActionResult UploadPicture(HttpPostedFileBase upfile)
+        public string UploadPicture(HttpPostedFileBase upfile)
         {
             if (upfile != null)
             {
@@ -157,14 +159,14 @@ namespace TaobaoMVC.Controllers
                     string suffix = upfile.FileName.Substring(upfile.FileName.LastIndexOf('.'));
                     string str = "/Upload/" + Guid.NewGuid().ToString() + suffix;
                     upfile.SaveAs(Server.MapPath("~" + str));
-                    return Json(str);
+                    return str;
                 }
                 catch (Exception ex)
                 {
-                    return Json(ex.Message);
+                    return null;
                 }
             }
-            return Json("别闹");
+            return null;
         }
 
         /// <summary>
