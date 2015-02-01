@@ -28,6 +28,7 @@
 				<form ng-show="createFormShow" ng-submit="createCategory()">
 					<input type="text" ng-model="categoryName" placeholder="请输入新分类名" required />
 					<input type="submit" value="添加"/>
+					<a href="javascript:;" ng-click="createToggle()">取消</a>
 				</form>
 			</div>
 			<div class="create-product" ng-controller="CreateProduct">
@@ -42,6 +43,7 @@
 					<input type="text" name="Price" placeholder="请输入商品价格" required />
 					<input type="file" name="upfile" required accept="image/*" />
 					<input type="submit" value="添加"/>
+					<a href="javascript:;" ng-click="createToggle()">取消</a>
 				</form>
 			</div>
 			<!-- 一个分类的产品在一个section内 -->
@@ -63,31 +65,30 @@
 				<ul class="manage-list">
 					<li><span class="list-img">商品图片</span><span class="list-price">商品价格</span><span class="list-name">商品名称</span><span class="list-control">操作</span></li>
 					<li ng-repeat="productDetail in product.products">
-						<!--<a href="productDetail.html?id={{productDetail.id}}">-->
-							<span class="list-img"><img ng-src="{{base + productDetail.picture}}" alt="{{productDetail.name}}" title="{{productDetail.name}}" /></span>
-							<span class="list-price">￥{{productDetail.price}}</span>
-							<span class="list-name">{{productDetail.name}}</span>
-							<span class="list-control" ng-controller="EditProduct">
-								<a href="javascript:;" ng-click="editToggle()">修改</a>
-								<a href="javascript:;" ng-click="deleteToggle()">删除</a>
-								<form name="editProductForm" id="editProductForm{{productDetail.id}}" ng-show="editFormShow" ng-submit="editProduct(productDetail.id)" method="post" enctype="multipart/form-data">
-									请选择商品分类：
-									<input type="hidden" name="token" value="{{token}}" />
-									<select name="ProductCategory_Id" ng-controller="ProductCategory">
-										<option value="{{category.id}}" ng-repeat="category in categorys">{{$index + 1 + "." + category.name}}</option>
-									</select>
-									<input type="text" name="Name" value="{{productDetail.name}}" placeholder="请输入商品名称" required />
-									<input type="text" name="Price" value="{{productDetail.price}}" placeholder="请输入商品价格" required />
-									<input type="file" name="upfile" required accept="image/*" />
-									<input type="submit" value="添加"/>
-								</form>
-								<form ng-show="deleteFormShow" ng-submit="deleteProduct(productDetail.id)">
-									真的要删除？
-									<input type="submit" value="删除" />
-									<a href="javascript:;" ng-click="deleteToggle()">取消</a>
-								</form>
-							</span>
-						<!--</a>-->
+						<span class="list-img"><img ng-src="{{base + productDetail.picture}}" alt="{{productDetail.name}}" title="{{productDetail.name}}" /></span>
+						<span class="list-price">￥{{productDetail.price}}</span>
+						<span class="list-name">{{productDetail.name}}</span>
+						<span class="list-control" ng-controller="EditProduct">
+							<a href="javascript:;" ng-click="editToggle()">修改</a>
+							<a href="javascript:;" ng-click="deleteToggle()">删除</a>
+							<form name="editProductForm" id="editProductForm{{productDetail.id}}" ng-show="editFormShow" ng-submit="editProduct(productDetail.id)" method="post" enctype="multipart/form-data">
+								请选择商品分类：
+								<input type="hidden" name="token" value="{{token}}" />
+								<select name="ProductCategory_Id" ng-controller="ProductCategory">
+									<option value="{{category.id}}" ng-repeat="category in categorys">{{$index + 1 + "." + category.name}}</option>
+								</select>
+								<input type="text" name="Name" value="{{productDetail.name}}" placeholder="请输入商品名称" required />
+								<input type="text" name="Price" value="{{productDetail.price}}" placeholder="请输入商品价格" required />
+								<input type="file" name="upfile" required accept="image/*" />
+								<input type="submit" value="添加"/>
+								<a href="javascript:;" ng-click="editToggle()">取消</a>
+							</form>
+							<form ng-show="deleteFormShow" ng-submit="deleteProduct(productDetail.id)">
+								真的要删除？
+								<input type="submit" value="删除" />
+								<a href="javascript:;" ng-click="deleteToggle()">取消</a>
+							</form>
+						</span>
 					</li>
 				</ul>
 			</section>

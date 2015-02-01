@@ -39,22 +39,33 @@
 		</nav>
 	</header>
 	<div class="container">
-		<article class="main" role="main">
+		<article class="main" role="main" ng-controller="CartList">
 			<section class="detail">
 				<h1>购物车&nbsp;-&nbsp;您一共选择了下列商品</h1>
-				<ul class="order-list">
+				<ul class="manage-list">
 					<li>
-						<div class="order-name"><span>商品名称</span></div>
-						<div class="order-price"><span>商品价格</span></div>
-						<div class="order-status"><span>商品数量</span></div>
+						<span class="list-img">商品图片</span>
+						<span class="list-price">商品价格</span>
+						<span class="list-name">商品名称</span>
+						<span class="list-control">商品数量</span>
 					</li>
-					<li>
-						<div class="order-name"><span>我是商品名称</span></div>
-						<div class="order-price"><span>￥1000.00</span></div>
-						<div class="order-status"><span>2</span></div>
+					<li ng-repeat="product in products">
+						<span class="list-img"><img ng-src="{{base + product.picture}}" alt="{{product.name}}" title="{{product.name}}" /></span>
+						<span class="list-price">￥{{product.price}}</span>
+						<span class="list-name">{{product.name}}</span>
+						<span class="list-control" ng-controller="EditProduct">
+							<form class="num">
+								<input type="number" value="1" ng-model="product.num" min="1"/>
+							</form>
+						</span>
 					</li>
 				</ul>
-				<form>
+				<p ng-bind="tips"></p>
+				<form id="buy-list" ng-submit="buyNow()">
+					<input type="text" name="ContactName" value="" placeholder="请输入联系人姓名" required />
+					<input type="text" name="ContactPhoneNo" value="" placeholder="请输入联系人电话" required />
+					<input type="text" name="ContactAddress" value="" placeholder="请输入地址" required />
+					<input type="text" name="Memo" value="" placeholder="请输入备注" />
 					<input class="submit" type="submit" value="确认购买" />
 				</form>
 			</section>

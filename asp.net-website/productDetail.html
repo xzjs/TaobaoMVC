@@ -48,8 +48,12 @@
 				<div class="detail-con">
 					<p class="configuration">类型：{{product.category}}</p>
 					<p class="price">￥{{product.price}}</p>
-					<div class="buy">
-						<a href="javascript:;">加入购物车</a>
+					<form>
+						<span>购买数量：</span>
+						<input type="number" value="1" ng-model="product.num" min="1"/>
+					</form>
+					<div class="buy" ng-controller="AddCart">
+						<a href="javascript:;" ng-click="addCart(product)">加入购物车</a>
 					</div>
 				</div>
 			</section>

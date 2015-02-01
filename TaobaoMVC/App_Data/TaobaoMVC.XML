@@ -163,7 +163,7 @@
             <returns></returns>
             <example>POST: /Product/Create</example>
         </member>
-        <member name="M:TaobaoMVC.Controllers.ProductController.Edit(TaobaoMVC.Models.Product,System.Int32,System.String)">
+        <member name="M:TaobaoMVC.Controllers.ProductController.Edit(TaobaoMVC.Models.Product,System.Int32,System.String,System.Web.HttpPostedFileBase)">
             <summary>
             修改商品
             </summary>

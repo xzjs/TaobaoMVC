@@ -743,6 +743,9 @@ header .container {
 	display: block;
 	text-align: center;
 }
+.detail.manage {
+	overflow: visible;
+}
 .detail.manage h1 a {
 	display: inline;
 	height: auto;
@@ -762,14 +765,16 @@ header .container {
 .manage h1 form {
 	position: absolute;
 	top: 44px;
-	width: 100%;
-	padding-left: .5em;
+	width: 99%;
+	padding-left: 1%;
 	background: #eee;
+	z-index: 10;
 }
 ul.manage-list {
 	float: none;
 }
 ul.manage-list li {
+	position: relative;
 	float: none;
 	width: auto;
 	font-size: 0;
@@ -797,10 +802,24 @@ ul.manage-list .list-name {
 ul.manage-list .list-control {
 	width: 20%;
 }
-ul.manage-list li div span {
-	display: block;
-	padding: .5em 0;
+ul.manage-list a {
+	display: inline;
+	padding: .5em;
 	text-align: center;
+}
+ul.manage-list a:hover {
+	border: none;
+	color: #fff;
+	background: #e74c3c;
+}
+ul.manage-list form {
+	position: absolute;
+	width: 98%;
+	left: 0;
+	bottom: -3em;
+	padding: 1%;
+	background: #eee;
+	z-index: 10;
 }
 .create-category,
 .create-product {
@@ -882,7 +901,13 @@ ul.manage-list li div span {
 	color: #fff;
 	background: #e74c3c;
 }
-
+form.num {
+	position: static !important;
+	background: none !important;
+}
+form.num input {
+	width: 80%;
+}
 aside {
 	float: left;
 	width: 186px;
