@@ -1012,7 +1012,8 @@ aside ul li a.active {
 	background: none;
 	border: none;
 }
-input.submit {
+input.submit,
+input.clean-cart {
 	display: block;
 	width: 80%;
 	height: 2em;
@@ -1025,6 +1026,13 @@ input.submit {
 input.submit:hover {
 	color: #fff;
 	background: #e74c3c;
+}
+input.clean-cart {
+	color: #666;
+	background: #eee;
+}
+input.clean-cart:hover {
+	color: #dc291e;
 }
 footer {
 	background: #f1f1f1;

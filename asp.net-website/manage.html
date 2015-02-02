@@ -66,8 +66,8 @@
 					<li><span class="list-img">商品图片</span><span class="list-price">商品价格</span><span class="list-name">商品名称</span><span class="list-control">操作</span></li>
 					<li ng-repeat="productDetail in product.products">
 						<span class="list-img"><img ng-src="{{base + productDetail.picture}}" alt="{{productDetail.name}}" title="{{productDetail.name}}" /></span>
-						<span class="list-price">￥{{productDetail.price}}</span>
 						<span class="list-name">{{productDetail.name}}</span>
+						<span class="list-price">￥{{productDetail.price}}</span>
 						<span class="list-control" ng-controller="EditProduct">
 							<a href="javascript:;" ng-click="editToggle()">修改</a>
 							<a href="javascript:;" ng-click="deleteToggle()">删除</a>

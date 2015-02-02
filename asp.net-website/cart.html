@@ -61,12 +61,13 @@
 					</li>
 				</ul>
 				<p ng-bind="tips"></p>
-				<form id="buy-list" ng-submit="buyNow()">
+				<form id="buy-list" ng-show="buyFormShow" ng-submit="buyNow()">
 					<input type="text" name="ContactName" value="" placeholder="请输入联系人姓名" required />
 					<input type="text" name="ContactPhoneNo" value="" placeholder="请输入联系人电话" required />
 					<input type="text" name="ContactAddress" value="" placeholder="请输入地址" required />
 					<input type="text" name="Memo" value="" placeholder="请输入备注" />
 					<input class="submit" type="submit" value="确认购买" />
+					<input class="clean-cart" type="button" value="清空购物车" ng-click="cleanCart()" />
 				</form>
 			</section>
 		</article>

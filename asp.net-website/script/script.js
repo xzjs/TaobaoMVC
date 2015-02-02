@@ -28,8 +28,12 @@ taobaoMVC.controller("ProductDetail", ["$scope", "$http", function ($scope, $htt
 	$scope.base = basePath;
 	if (query[0] === "id") {
 		$http({method:"GET", url: basePath + "Home/ProductDetail/" + query[1]}).success(function (data) {
+			console.log(data);
 			$scope.product = data;
 			$scope.product.num = 1;
+			if (data.comment_collect.length == 0) {
+				$scope.tips = "还没有相关评论！";
+			}
 		}).error(function (data, status) {
 			//
 		});
@@ -130,6 +134,7 @@ taobaoMVC.controller("UserStatus", ["$scope", "$http", "$cookieStore", function 
 			} else{
 				$scope.target = "loginOrReg.html";
 				$scope.tips = "验证身份失败,请[登录]或[注册]";
+				$cookieStore.remove("token");
 				alert(data);
 			}
 		}).error(function (data, status) {
@@ -144,7 +149,8 @@ taobaoMVC.controller("UserStatus", ["$scope", "$http", "$cookieStore", function 
 					location.reload();
 				}
 			}).error(function (data, status) {
-				$scope.logoutText = "注销失败";
+				alert("注销失败");
+//				$scope.logoutText = "注销失败";
 			});
 		}
 	} else{
@@ -181,13 +187,19 @@ taobaoMVC.controller("AddCart", ["$scope", "$http", "$cookieStore", function ($s
 taobaoMVC.controller("CartList", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
 	// 购物车列表
 	$scope.base = basePath;
+	$scope.buyFormShow = false;
 	var token = $cookieStore.get("token");
 	if ($cookieStore.get("products")) {
 		$scope.products = $cookieStore.get("products");
+		$scope.buyFormShow = true;
 	} else {
 		$scope.tips = "购物车里还没有任何商品。";
 	}
 	$scope.buyNow = function () {
+		if (!token) {
+			alert("请先登录！");
+			return;
+		}
 		var i,
 			postData = "[",
 			tmp = {};
@@ -208,6 +220,10 @@ taobaoMVC.controller("CartList", ["$scope", "$http", "$cookieStore", function ($
 		}).error(function (data, status) {
 			alert("购买失败！");
 		});
+	}
+	$scope.cleanCart = function () {
+		$cookieStore.remove("products");
+		location.reload();
 	}
 }]);
 taobaoMVC.controller("ManageController", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
