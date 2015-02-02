@@ -54,7 +54,8 @@ namespace TaobaoMVC.Controllers
                             category = y.Product.ProductCategory.Name,
                             name = y.Product.Name,
                             picture = y.Product.Picture,
-                            price = y.Product.Price
+                            price = y.Product.Price,
+                            num=y.Amount
                         })
                     });
                     return Json(collect);

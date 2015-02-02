@@ -229,15 +229,18 @@ taobaoMVC.controller("CartList", ["$scope", "$http", "$cookieStore", function ($
 taobaoMVC.controller("OrderList", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
 	// 查看订单列表，评论
 	var token = $cookieStore.get("token");
+	$scope.base = basePath;
 	if (!token) {
 		window.location.replace("loginOrReg.html");
 	}
 	$http({method:"POST", url: basePath + "OrderHeader/", data: "token=" + token, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
 		console.log(data);
-		if (data.id) {
-			
+		if (data.length == 0) {
+			// 还没有订单
+		} else if (data[0].id) {
+			$scope.orders = data;
 		} else{
-			
+			alert(data);
 		}
 	}).error(function (data, status) {
 		
