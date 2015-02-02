@@ -134,5 +134,10 @@ namespace TaobaoMVC.Controllers
             });
             return Json(collect);
         }
+
+        public ActionResult Start()
+        {
+            return View();
+        }
     }
 }

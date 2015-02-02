@@ -1,5 +1,5 @@
 // JavaScript Document
-var basePath = "http://localhost:57445/";
+var basePath = "http://localhost:57445/"; // 请输入后端地址，带最后的反斜杠
 var taobaoMVC = angular.module('taobaoMVC',['ngCookies']);
 taobaoMVC.controller("ProductCategory", ["$scope", "$http", function ($scope, $http) {
 	// 获得产品分类列表

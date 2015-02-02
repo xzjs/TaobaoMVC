@@ -283,6 +283,7 @@
     <Content Include="Views\OrderHeader\Create.cshtml" />
     <Content Include="Views\OrderHeader\Edit.cshtml" />
     <Content Include="Views\OrderHeader\Delete.cshtml" />
+    <Content Include="Views\Home\Start.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Upload\" />
