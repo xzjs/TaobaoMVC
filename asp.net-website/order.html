@@ -44,17 +44,22 @@
 				<h1>我的订单</h1>
 				<ul class="order-list">
 					<li>
-						<span class="order-name">收货人</span>
-						<span class="order-no">联系方式</span>
-						<span class="order-address">收货地址</span>
-						<span class="order-memo">备注</span>
-						<span class="order-price">订单价格</span>
-						<span class="order-status">订单状态</span>
-					</li>
-					<li>
-						<div class="order-name"><span>我是商品名称</span><span>我是第二个商品名称</span></div>
-						<div class="order-price"><span>￥1000.00</span></div>
-						<div class="order-status"><span>已发货</span></div>
+						<div class="title">
+							<span class="order-name">收货人:</span>
+							<span class="order-no">联系方式:</span>
+							<span class="order-address">收货地址:</span>
+						</div>
+						<div>
+							<span class="list-img"><img ng-src="{{base + product.picture}}" alt="{{product.name}}" title="{{product.name}}" /></span>
+							<!--<span class="list-price">￥{{product.price}}</span>-->
+							<span class="list-name">{{product.name}}</span>
+							<span class="list-control">数量：</span>
+						</div>
+						<div class="title">
+							<span class="order-name">总价:</span>
+							<span class="order-no">下单时间：</span>
+							<span class="order-memo">备注:</span>
+						</div>
 					</li>
 				</ul>
 			</section>

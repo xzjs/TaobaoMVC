@@ -1075,21 +1075,31 @@ ul.order-list {
 ul.order-list li {
 	float: none;
 	width: auto;
+	margin-bottom: .5em;
 	font-size: 0;
 }
-ul.order-list li > span {
+ul.order-list li span {
+	font-size: 14px;
+}
+ul.order-list li .title {
+	background: #eee;
+}
+ul.order-list li .title span {
 	display: inline-block;
 	padding: .5em 0;
-	font-size: 16px;
-	vertical-align: top;
-	text-align: center;
+	text-align: left;
 }
-/*ul.order-list li div span {
-	display: block;
-	
-}*/
 .order-name {
-	width: 70%;
+	width: 15%;
+}
+.order-no {
+	width: 25%;
+}
+.order-address {
+	width: 60%;
+}
+.order-memo {
+	width: 60%;
 }
 .order-price {
 	width: 15%;
