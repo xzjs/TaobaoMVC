@@ -46,7 +46,7 @@
 				<ul class="product-list">
 					<li ng-repeat="productDetail in product.products">
 						<a href="productDetail.html?id={{productDetail.id}}">
-							<img ng-src="{{productDetail.picture}}" alt="{{productDetail.name}}" title="{{productDetail.name}}" />
+							<img ng-src="{{base + productDetail.picture}}" alt="{{productDetail.name}}" title="{{productDetail.name}}" />
 							<span class="price">￥{{productDetail.price}}</span>
 							<span class="name">{{productDetail.name}}</span>
 							<!--<span class="configuration"></span>-->

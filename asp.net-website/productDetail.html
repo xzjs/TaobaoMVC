@@ -43,13 +43,17 @@
 			<section class="detail">
 				<h1>{{product.name}}</h1>
 				<div class="detail-img">
-					<img ng-src="{{product.picture}}" alt="{{product.name}}" title="{{product.name}}" />
+					<img ng-src="{{base + product.picture}}" alt="{{product.name}}" title="{{product.name}}" />
 				</div>
 				<div class="detail-con">
 					<p class="configuration">类型：{{product.category}}</p>
 					<p class="price">￥{{product.price}}</p>
-					<div class="buy">
-						<a href="javascript:;">加入购物车</a>
+					<form>
+						<span>购买数量：</span>
+						<input type="number" value="1" ng-model="product.num" min="1"/>
+					</form>
+					<div class="buy" ng-controller="AddCart">
+						<a href="javascript:;" ng-click="addCart(product)">加入购物车</a>
 					</div>
 				</div>
 			</section>

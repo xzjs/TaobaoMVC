@@ -60,12 +60,21 @@ namespace TaobaoMVC.Controllers
                 var pc = db.ProductCategories.Find(ProductCategory_Id);
                 product.ProductCategory = pc;
                 product.Picture = UploadPicture(upfile);
+<<<<<<< HEAD
 
                 db.Products.Add(product);
                 db.SaveChanges();
                 return Json(true);
 
 
+=======
+                if (ModelState.IsValid)
+                {
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                    return Json(true);
+                }
+>>>>>>> 6ee6cf4c2721aa9b2d180e5fe40d90ee30dc30a2
             }
 
             return Json("没有权限");
@@ -94,7 +103,11 @@ namespace TaobaoMVC.Controllers
         /// <example>POST: /Product/Edit/5</example>
         /// <returns>true或异常</returns>
         [HttpPost]
+<<<<<<< HEAD
+        public ActionResult Edit(Product product, int ProductCategory_Id, string token)
+=======
         public ActionResult Edit(Product product, int ProductCategory_Id, string token, HttpPostedFileBase upfile)
+>>>>>>> 6ee6cf4c2721aa9b2d180e5fe40d90ee30dc30a2
         {
             if (ValidMember(token))
             {
