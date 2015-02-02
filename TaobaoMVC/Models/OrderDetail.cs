@@ -17,9 +17,12 @@ namespace TaobaoMVC.Models
         [DisplayName("訂單主檔")]
         public virtual OrderHeader OrderHeader { get; set; }
 
-        [DisplayName("訂購商品")]
+        [DisplayName("订购商品")]
         [Required]
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
+
+        //
+        //
 
         [DisplayName("选购数量")]
         [Required]
