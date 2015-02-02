@@ -31,7 +31,7 @@ taobaoMVC.controller("ProductDetail", ["$scope", "$http", function ($scope, $htt
 			console.log(data);
 			$scope.product = data;
 			$scope.product.num = 1;
-			if (data.comment_collect.length == 0) {
+			if (data.comments.length == 0) {
 				$scope.tips = "还没有相关评论！";
 			}
 		}).error(function (data, status) {
@@ -252,13 +252,14 @@ taobaoMVC.controller("OrderList", ["$scope", "$http", "$cookieStore", function (
 	$scope.commentToggle = function () {
 		$scope.commentFormShow = !$scope.commentFormShow;
 	}
-	$scope.commentSent = function (id) {
+	$scope.commentSent = function (id, productComment) {
 		console.log(id);
-		$http({method:"POST", url: basePath + "/Comment/Create/", data: "token=" + token + "&Product_ID=" + id + "&comment=" + $scope.productComment, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+		console.log(productComment);
+		$http({method:"POST", url: basePath + "/Comment/Create/", data: "token=" + token + "&Product_ID=" + id + "&Content=" + productComment, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
 			console.log(data);
 			if (data == true) {
 				alert("评论成功");
-				$scope.productComment = "";
+//				$scope.productComment = "";
 				$scope.commentFormShow = false;
 			} else{
 				alert(data);

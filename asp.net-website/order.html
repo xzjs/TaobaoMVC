@@ -61,8 +61,8 @@
 							<span class="list-control">数量：{{product.num}}</span>
 							<span class="list-control">
 								<a href="javascript:;" ng-click="commentToggle()">评论</a>
-								<form ng-show="commentFormShow" ng-submit="commentSent(product.id)">
-									<input type="text" ng-model="productComment" placeholder="请输入评论" />
+								<form ng-show="commentFormShow" ng-submit="commentSent(product.id, product.comment)">
+									<input type="text" ng-model="product.comment" placeholder="请输入评论" />
 									<input type="submit" value="评论"/>
 									<a href="javascript:;" ng-click="commentToggle()">取消</a>
 								</form>

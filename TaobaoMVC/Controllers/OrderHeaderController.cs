@@ -50,7 +50,7 @@ namespace TaobaoMVC.Controllers
                         total_price = x.TotalPrice,
                         orderdatails = x.OrderDetailItems.Select(y => new
                         {
-                            id = y.Id,
+                            id = y.Product.Id,
                             category = y.Product.ProductCategory.Name,
                             name = y.Product.Name,
                             picture = y.Product.Picture,

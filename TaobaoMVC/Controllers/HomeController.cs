@@ -101,7 +101,10 @@ namespace TaobaoMVC.Controllers
                 picture = data.Picture,
                 price = data.Price,
                 category = data.ProductCategory.Name,
-                comment_collect = data.Comments
+                comments = data.Comments.Select(x => new
+                {
+                    content=x.Content
+                })
             };
             return Json(collect, JsonRequestBehavior.AllowGet);
         }
