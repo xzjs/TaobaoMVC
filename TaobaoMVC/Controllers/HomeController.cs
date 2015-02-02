@@ -18,11 +18,11 @@ namespace TaobaoMVC.Controllers
         /// <example>GET: /Home/</example>
         public ActionResult Index(int id=0)
         {
-            try
-            {
-                HttpContext.Application["1"] = db.Members.Find(1);
-            }
-            catch (Exception ex) { }
+            //try
+            //{
+            //    HttpContext.Application["1"] = db.Members.Find(1);
+            //}
+            //catch (Exception ex) { }
             List<ProductCategory> data = new List<ProductCategory>();
             if (id == 0)
             {

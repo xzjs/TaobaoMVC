@@ -18,12 +18,48 @@ namespace TaobaoMVC.Controllers
     {
         private TaobaoMVCContext db = new TaobaoMVCContext();
 
-        //
-        // GET: /OrderHeader/
-
-        public ActionResult Index()
+        /// <summary>
+        /// 查看用户的订单
+        /// </summary>
+        /// <param name="token">用户token</param>
+        /// <returns>内容|没有权限|异常</returns>
+        /// <example>POST: /OrderHeader/</example>
+        [HttpPost]
+        public ActionResult Index(string token)
         {
-            return View(db.OrderHeaders.ToList());
+            try
+            {
+                if (ValidMember(token))
+                {
+                    var member = (Member)HttpContext.Application[token];
+                    var data = member.Orders.ToList();
+                    var collect = data.Select(x => new
+                    {
+                        id = x.Id,
+                        name = x.Member.Name,
+                        contact_name = x.ContactName,
+                        contact_phone_no = x.ContactPhoneNo,
+                        contamct_address = x.ContactAddress,
+                        memo = x.Memo,
+                        buy_on = x.BuyOn,
+                        total_price = x.TotalPrice,
+                        orderdatails = x.OrderDetailItems.Select(y => new
+                        {
+                            id = y.Id,
+                            category = y.Product.ProductCategory.Name,
+                            name = y.Product.Name,
+                            picture = y.Product.Picture,
+                            price = y.Product.Price
+                        })
+                    });
+                    return Json(collect);
+                }
+                return Json("没有权限");
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         //
@@ -164,6 +200,21 @@ namespace TaobaoMVC.Controllers
             db.Dispose();
 
             base.Dispose(disposing);
+        }
+
+        /// <summary>
+        /// 验证用户token的权限
+        /// </summary>
+        /// <param name="token">传回来的token</param>
+        /// <returns>true ，false</returns>
+        private bool ValidMember(string token)
+        {
+            var member = (Member)HttpContext.Application[token];
+            if (member == null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -94,6 +94,14 @@
             <param name="token">身份凭证</param>
             <returns>包含用户昵称和是否为管理员身份</returns>
         </member>
+        <member name="M:TaobaoMVC.Controllers.OrderHeaderController.Index(System.String)">
+            <summary>
+            查看用户的订单
+            </summary>
+            <param name="token">用户token</param>
+            <returns>内容|没有权限|异常</returns>
+            <example>POST: /OrderHeader/</example>
+        </member>
         <member name="M:TaobaoMVC.Controllers.OrderHeaderController.Create(TaobaoMVC.Models.OrderHeader,System.String,System.String)">
             <summary>
             添加订单
@@ -110,6 +118,13 @@
             </summary>
             <param name="id"></param>
             <returns></returns>
+        </member>
+        <member name="M:TaobaoMVC.Controllers.OrderHeaderController.ValidMember(System.String)">
+            <summary>
+            验证用户token的权限
+            </summary>
+            <param name="token">传回来的token</param>
+            <returns>true ，false</returns>
         </member>
         <member name="M:TaobaoMVC.Controllers.ProductCategoryController.Index">
             <summary>
