@@ -128,17 +128,18 @@ taobaoMVC.controller("UserStatus", ["$scope", "$http", "$cookieStore", function 
 		$scope.tips = "正在自动登录...";
 		$http({method:"POST", url: basePath + "Member/GetMember/", data: "token=" + token, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
 			if (data.name) {
-				$scope.tips = "[" + data.name + "]";
+				$scope.tips = "[" + data.name + "，查看订单]";
 				$scope.target = "order.html";
 				$scope.logoutText = "[注销]";
 			} else{
 				$scope.target = "loginOrReg.html";
 				$scope.tips = "验证身份失败,请[登录]或[注册]";
 				$cookieStore.remove("token");
-				alert(data);
+//				alert(data);
 			}
 		}).error(function (data, status) {
-			$scope.tips = "登录失败";
+			alert("登录失败")
+//			$scope.tips = "登录失败";
 		});
 		$scope.logout = function () {
 			$http({method:"POST", url: basePath + "Member/Logout/", data: "token=" + token, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
@@ -214,6 +215,7 @@ taobaoMVC.controller("CartList", ["$scope", "$http", "$cookieStore", function ($
 			if (data == true) {
 				alert("购买成功！");
 				$cookieStore.remove("products");
+				location.href = "order.html";
 			} else {
 				alert(data);
 			}
@@ -229,14 +231,15 @@ taobaoMVC.controller("CartList", ["$scope", "$http", "$cookieStore", function ($
 taobaoMVC.controller("OrderList", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
 	// 查看订单列表，评论
 	var token = $cookieStore.get("token");
-	$scope.base = basePath;
 	if (!token) {
 		window.location.replace("loginOrReg.html");
 	}
+	$scope.base = basePath;
 	$http({method:"POST", url: basePath + "OrderHeader/", data: "token=" + token, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
 		console.log(data);
 		if (data.length == 0) {
 			// 还没有订单
+			$scope.tips = "您还没有任何订单。";
 		} else if (data[0].id) {
 			$scope.orders = data;
 		} else{
@@ -245,7 +248,25 @@ taobaoMVC.controller("OrderList", ["$scope", "$http", "$cookieStore", function (
 	}).error(function (data, status) {
 		
 	});
-	
+	$scope.commentFormShow = false;
+	$scope.commentToggle = function () {
+		$scope.commentFormShow = !$scope.commentFormShow;
+	}
+	$scope.commentSent = function (id) {
+		console.log(id);
+		$http({method:"POST", url: basePath + "/Comment/Create/", data: "token=" + token + "&Product_ID=" + id + "&comment=" + $scope.productComment, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+			console.log(data);
+			if (data == true) {
+				alert("评论成功");
+				$scope.productComment = "";
+				$scope.commentFormShow = false;
+			} else{
+				alert(data);
+			}
+		}).error(function (data, status) {
+			alert("评论失败");
+		});
+	}
 }]);
 taobaoMVC.controller("ManageController", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
 	// 后台管理身份验证

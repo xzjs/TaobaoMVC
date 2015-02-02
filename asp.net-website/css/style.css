@@ -802,17 +802,20 @@ ul .list-name {
 ul .list-control {
 	width: 20%;
 }
-ul.manage-list a {
+ul.manage-list a,
+ul.order-list a {
 	display: inline;
 	padding: .5em;
 	text-align: center;
 }
-ul.manage-list a:hover {
+ul.manage-list a:hover,
+ul.order-list a:hover {
 	border: none;
 	color: #fff;
 	background: #e74c3c;
 }
-ul.manage-list form {
+ul.manage-list form,
+ul.order-list form {
 	position: absolute;
 	width: 98%;
 	left: 0;
@@ -1099,6 +1102,7 @@ ul.order-list li .title span {
 	text-align: left;
 }
 .order-product {
+	position: relative;
 	border-top: 1px dashed #ccc;
 }
 .order-name {
@@ -1118,4 +1122,11 @@ ul.order-list li .title span {
 }
 .order-status {
 	width: 15%;
+}
+ul.order-list form {
+	top: 0;
+	bottom: auto;
+}
+ul.order-list form input[type="text"] {
+	width: 80%;
 }
