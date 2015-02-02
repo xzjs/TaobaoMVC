@@ -2,7 +2,7 @@
 var basePath = "http://localhost:57445/"; // 请输入后端地址，带最后的反斜杠
 var taobaoMVC = angular.module('taobaoMVC',['ngCookies']);
 taobaoMVC.controller("ProductCategory", ["$scope", "$http", function ($scope, $http) {
-	// 获得产品分类列表
+	// 获得商品分类列表
 	$http({method:"GET", url: basePath + "ProductCategory/"}).success(function (data) {
 		$scope.categorys = data;
 	}).error(function (data, status) {
@@ -10,7 +10,7 @@ taobaoMVC.controller("ProductCategory", ["$scope", "$http", function ($scope, $h
 	});
 }]);
 taobaoMVC.controller("ProductList", ["$scope", "$http", function ($scope, $http) {
-	// 获得产品列表，按分类区分
+	// 获得商品列表，按分类区分
 	$scope.base = basePath;
 	$http({method:"GET", url: basePath + "Home/"}).success(function (data) {
 		$scope.products = data;
@@ -19,7 +19,7 @@ taobaoMVC.controller("ProductList", ["$scope", "$http", function ($scope, $http)
 	});
 }]);
 taobaoMVC.controller("ProductDetail", ["$scope", "$http", function ($scope, $http) {
-	// 获得产品详细信息
+	// 获得商品详细信息
 	var queryString = location.search.length > 0 ? location.search.substring(1) : "";
 	if (queryString.length == 0) {
 		window.location.replace("index.html");
@@ -44,7 +44,7 @@ taobaoMVC.controller("ProductDetail", ["$scope", "$http", function ($scope, $htt
 	
 }]);
 taobaoMVC.controller("ListShow", ["$scope", "$http", function ($scope, $http) {
-	// 查看单独一个分类的产品或展示搜索结果
+	// 查看单独一个分类的商品或展示搜索结果
 	var queryString = location.search.length > 0 ? location.search.substring(1) : "";
 	if (queryString.length == 0) {
 		window.location.replace("index.html");
@@ -52,7 +52,7 @@ taobaoMVC.controller("ListShow", ["$scope", "$http", function ($scope, $http) {
 	var query = decodeURIComponent(queryString).split("=");
 	$scope.base = basePath;
 	if (query[0] === "categoryId") {
-		// 查看单独一个分类的产品
+		// 查看单独一个分类的商品
 		$http({method:"GET", url: basePath + "Home/index/" + query[1]}).success(function (data) {
 			$scope.titleString = data[0].name || "";
 			$scope.products = data[0].products || {};
@@ -424,23 +424,6 @@ taobaoMVC.controller("EditProduct", ["$scope", "$http", "$cookieStore", function
 }]);
 (function() {
 	$.extend({
-		notice: function(notice) {
-			var status_timer;  //设置计时器
-			$(notice).hover(function(){
-				window.clearTimeout(status_timer);
-			},function () {
-				status_timer=window.setTimeout(status_scroll,5000);
-			});
-			status_timer=window.setTimeout(status_scroll,1000);
-			
-			function status_scroll(){
-				$(notice).children("ul").animate({top:"-40px"},1000,function(){
-					$(notice).find("li:first").appendTo(notice + " ul");
-					$(notice).children("ul").css("top","0");
-				});
-				status_timer=window.setTimeout(status_scroll,5000);//轮换速度
-			}
-		},
 		regInput: function(regInput) {
 			var $in = $(regInput).children("input,textarea");
 			$in.focus(function() {
@@ -455,12 +438,6 @@ taobaoMVC.controller("EditProduct", ["$scope", "$http", "$cookieStore", function
 				if ($(this).val()) {
 					$(this).siblings("span").hide();
 				}
-			})
-		},
-		changeInfo: function(btn) {
-			var $btn = $(btn);
-			$btn.on("click", function() {
-				$(this).prev().removeAttr("disabled").parents(".info").siblings("input").show();
 			})
 		},
 		scrollFixed: function (scrollFixedElement) {
