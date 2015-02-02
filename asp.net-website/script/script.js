@@ -226,6 +226,24 @@ taobaoMVC.controller("CartList", ["$scope", "$http", "$cookieStore", function ($
 		location.reload();
 	}
 }]);
+taobaoMVC.controller("OrderList", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
+	// 查看订单列表，评论
+	var token = $cookieStore.get("token");
+	if (!token) {
+		window.location.replace("loginOrReg.html");
+	}
+	$http({method:"POST", url: basePath + "OrderHeader/", data: "token=" + token, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}).success(function (data, status) {
+		console.log(data);
+		if (data.id) {
+			
+		} else{
+			
+		}
+	}).error(function (data, status) {
+		
+	});
+	
+}]);
 taobaoMVC.controller("ManageController", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
 	// 后台管理身份验证
 	var token = $cookieStore.get("token"),

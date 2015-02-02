@@ -1077,16 +1077,17 @@ ul.order-list li {
 	width: auto;
 	font-size: 0;
 }
-ul.order-list li div {
+ul.order-list li > span {
 	display: inline-block;
+	padding: .5em 0;
 	font-size: 16px;
 	vertical-align: top;
-}
-ul.order-list li div span {
-	display: block;
-	padding: .5em 0;
 	text-align: center;
 }
+/*ul.order-list li div span {
+	display: block;
+	
+}*/
 .order-name {
 	width: 70%;
 }

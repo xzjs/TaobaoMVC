@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-cn">
+<html lang="zh-cn" ng-app="taobaoMVC">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -16,45 +16,40 @@
 	<header>
 		<div class="container">
 			<div class="logo">
-				<a href="#"><img src="images/logo.jpg" alt="联想网上商城" title="联想网上商城" /></a>
+				<a href="index.html"><img src="images/logo.jpg" alt="网上商城" title="网上商城" /></a>
 			</div>
-			<div class="welcome">
-				<p><a href="#">[用户名]</a>，查看<a href="#">[我的订单]</a>，<a href="#">注销</a></p>
+			<div class="welcome" ng-controller="UserStatus">
+				<p>欢迎来到网上商城！ <a ng-href="{{target}}" ng-bind="tips">请[登录]或者[免费注册]</a><a href="#" ng-click="logout()" ng-bind="logoutText"></a></p>
 			</div>
-			<div class="clear"></div>
 		</div>
-		<nav role="navigation">
+		<nav class="nav" role="navigation">
 			<div class="container">
 				<ul class="first">
-					<li><a href="#">商城首页</a></li>
-					<li>
-						<a href="#">所有产品</a>
-						<ul class="second">
-							<li>
-								<a href="#">分类一</a>
-							</li>
-							<li>
-								<a href="#">分类二</a>
-							</li>
-							<li>
-								<a href="#">分类二</a>
-							</li>
-						</ul>
-					</li>
-					<li><a href="#">售后服务</a></li>
+					<li><a href="index.html">商城首页</a></li>
+					<li><a href="cart.html">购物车</a></li>
+					<li><a href="afterSales.html">售后服务</a></li>
 				</ul>
+				<div class="search">
+					<form method="post">
+						<input type="text" name="searchText" placeholder="请输入查询关键字" ng-model="searchText" />
+						<a href="list.html?search={{searchText}}">搜索</a>
+					</form>
+				</div>
 			</div>
 		</nav>
 	</header>
 	<div class="container">
-		<article class="main" role="main">
+		<article class="main manage" role="main" ng-controller="OrderList">
 			<section class="detail">
 				<h1>我的订单</h1>
 				<ul class="order-list">
 					<li>
-						<div class="order-name"><span>商品名称</span></div>
-						<div class="order-price"><span>订单价格</span></div>
-						<div class="order-status"><span>订单状态</span></div>
+						<span class="order-name">收货人</span>
+						<span class="order-no">联系方式</span>
+						<span class="order-address">收货地址</span>
+						<span class="order-memo">备注</span>
+						<span class="order-price">订单价格</span>
+						<span class="order-status">订单状态</span>
 					</li>
 					<li>
 						<div class="order-name"><span>我是商品名称</span><span>我是第二个商品名称</span></div>
@@ -64,7 +59,7 @@
 				</ul>
 			</section>
 		</article>
-		<aside>
+		<!--<aside>
 			<section id="hotsale">
 				<h1>我的商城</h1>
 				<ul>
@@ -73,7 +68,7 @@
 				</ul>
 			</section>
 		</aside>
-		<div class="clear"></div>
+		<div class="clear"></div>-->
 	</div>
 	<footer>
 		<div class="container">
@@ -82,6 +77,8 @@
 		<p>版权所有：1998－2014 联想官网商城 │ 京ICP备11035381</p>
 	</footer>
 <script type="text/javascript" src="script/jquery-1.11.1.min.js" ></script>
+<script type="text/javascript" src="script/angular.min.js" ></script>
+<script type="text/javascript" src="script/angular-cookies.min.js" ></script>
 <script type="text/javascript" src="script/script.js"></script>
 <script type="text/javascript">
 </script>
