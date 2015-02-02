@@ -27,11 +27,16 @@ namespace TaobaoMVC.Controllers
         [HttpPost]
         public ActionResult Index(string token)
         {
+            //Member m = db.Members.Find(4);
+            //OrderHeader oh = m.Orders.FirstOrDefault();
+            //OrderDetail od = oh.OrderDetailItems.FirstOrDefault();
+            //Product p = od.Product;
+
             try
             {
                 if (ValidMember(token))
                 {
-                    var member = (Member)HttpContext.Application[token];
+                    var member =db.Members.Find(((Member)HttpContext.Application[token]).Id);
                     var data = member.Orders.ToList();
                     var collect = data.Select(x => new
                     {
