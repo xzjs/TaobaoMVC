@@ -60,9 +60,9 @@
 			<section class="comment">
 				<h1>商品评价：</h1>
 				<ul class="comment-list">
-					<li ng-repeat="comment in comment_collect">
-						<span class="list-index">{{$index}}</span>
-						<span>{{comment}}</span>
+					<li ng-repeat="comment in product.comments">
+						<span class="list-index">{{$index + 1}}.</span>
+						<span>{{comment.content}}</span>
 					</li>
 				</ul>
 				<p ng-bind="tips"></p>

@@ -45,7 +45,7 @@ namespace TaobaoMVC.Controllers
         /// <summary>
         /// 添加评论
         /// </summary>
-        /// <param name="comment">Content</param>
+        /// <param name="comment">标签name：Content</param>
         /// <param name="Product_ID">产品ID</param>
         /// <param name="token">用户验证token</param>
         /// <example>POST: /Comment/Create</example>
@@ -57,7 +57,7 @@ namespace TaobaoMVC.Controllers
             {
                 if (ValidMember(token))
                 {
-                    var m = (Member)HttpContext.Application[token];
+                    var m =db.Members.Find(((Member)HttpContext.Application[token]).Id);
                     //Member m = db.Members.Find(Member_ID);
                     if (m == null)
                     {

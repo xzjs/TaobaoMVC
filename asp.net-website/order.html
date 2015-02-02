@@ -43,25 +43,34 @@
 			<section class="detail">
 				<h1>我的订单</h1>
 				<ul class="order-list">
-					<li>
+					<li ng-repeat="order in orders">
 						<div class="title">
-							<span class="order-name">收货人:</span>
-							<span class="order-no">联系方式:</span>
-							<span class="order-address">收货地址:</span>
+							<span class="order-name">收货人:{{order.contact_name}}</span>
+							<span class="order-no">联系方式:{{order.contact_phone_no}}</span>
+							<span class="order-address">收货地址:{{order.contamct_address}}</span>
 						</div>
-						<div>
+						<div class="title">
+							<span class="order-name">总价:{{order.total_price}}</span>
+							<span class="order-no">下单时间：{{order.buy_on}}</span>
+							<span class="order-memo">备注:{{order.memo}}</span>
+						</div>
+						<div class="order-product" ng-repeat="product in order.orderdatails">
 							<span class="list-img"><img ng-src="{{base + product.picture}}" alt="{{product.name}}" title="{{product.name}}" /></span>
-							<!--<span class="list-price">￥{{product.price}}</span>-->
-							<span class="list-name">{{product.name}}</span>
-							<span class="list-control">数量：</span>
-						</div>
-						<div class="title">
-							<span class="order-name">总价:</span>
-							<span class="order-no">下单时间：</span>
-							<span class="order-memo">备注:</span>
+							<span class="order-no">名称：{{product.name}}</span>
+							<span class="list-price">单价：￥{{product.price}}</span>
+							<span class="list-control">数量：{{product.num}}</span>
+							<span class="list-control">
+								<a href="javascript:;" ng-click="commentToggle()">评论</a>
+								<form ng-show="commentFormShow" ng-submit="commentSent(product.id, product.comment)">
+									<input type="text" ng-model="product.comment" placeholder="请输入评论" />
+									<input type="submit" value="评论"/>
+									<a href="javascript:;" ng-click="commentToggle()">取消</a>
+								</form>
+							</span>
 						</div>
 					</li>
 				</ul>
+				<p ng-bind="tips"></p>
 			</section>
 		</article>
 		<!--<aside>

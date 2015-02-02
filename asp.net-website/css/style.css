@@ -790,29 +790,32 @@ ul.manage-list li span img {
 	display: block;
 	width: 100%;
 }
-ul.manage-list .list-img {
+ul .list-img {
 	width: 20%;
 }
-ul.manage-list .list-price {
+ul .list-price {
 	width: 15%;
 }
-ul.manage-list .list-name {
+ul .list-name {
 	width: 45%;
 }
-ul.manage-list .list-control {
+ul .list-control {
 	width: 20%;
 }
-ul.manage-list a {
+ul.manage-list a,
+ul.order-list a {
 	display: inline;
 	padding: .5em;
 	text-align: center;
 }
-ul.manage-list a:hover {
+ul.manage-list a:hover,
+ul.order-list a:hover {
 	border: none;
 	color: #fff;
 	background: #e74c3c;
 }
-ul.manage-list form {
+ul.manage-list form,
+ul.order-list form {
 	position: absolute;
 	width: 98%;
 	left: 0;
@@ -876,7 +879,7 @@ ul.manage-list form {
 }
 .comment-list li {
 	position: relative;
-	padding: .5em 0 .5em 2em;
+	padding: .5em 0 .5em 1.5em;
 	border-bottom: 1px dashed #ccc;
 	overflow: hidden;
 }
@@ -1075,11 +1078,20 @@ ul.order-list {
 ul.order-list li {
 	float: none;
 	width: auto;
-	margin-bottom: .5em;
+	border-bottom: 1px solid #e74c3c;
+}
+ul.order-list li > div {
 	font-size: 0;
+	text-align: center;
+	vertical-align: middle;
 }
 ul.order-list li span {
+	display: inline-block;
 	font-size: 14px;
+}
+ul.order-list li img {
+	width: 100%;
+	vertical-align: middle;
 }
 ul.order-list li .title {
 	background: #eee;
@@ -1088,6 +1100,10 @@ ul.order-list li .title span {
 	display: inline-block;
 	padding: .5em 0;
 	text-align: left;
+}
+.order-product {
+	position: relative;
+	border-top: 1px dashed #ccc;
 }
 .order-name {
 	width: 15%;
@@ -1106,4 +1122,11 @@ ul.order-list li .title span {
 }
 .order-status {
 	width: 15%;
+}
+ul.order-list form {
+	top: 0;
+	bottom: auto;
+}
+ul.order-list form input[type="text"] {
+	width: 80%;
 }

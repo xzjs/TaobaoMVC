@@ -46,11 +46,11 @@ namespace TaobaoMVC.Controllers
                         contact_phone_no = x.ContactPhoneNo,
                         contamct_address = x.ContactAddress,
                         memo = x.Memo,
-                        buy_on = x.BuyOn.ToShortDateString(),
+                        buy_on = x.BuyOn.ToLongDateString().ToString(),
                         total_price = x.TotalPrice,
                         orderdatails = x.OrderDetailItems.Select(y => new
                         {
-                            id = y.Id,
+                            id = y.Product.Id,
                             category = y.Product.ProductCategory.Name,
                             name = y.Product.Name,
                             picture = y.Product.Picture,
